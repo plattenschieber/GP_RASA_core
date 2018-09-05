@@ -6,6 +6,9 @@ actions:
 - utter_greet
 - utter_month
 - action_print_test
+- action_fallback
+
+## - utter_default um einen default Fallback festzulegen
 
 entities:
   - entityName
@@ -21,4 +24,8 @@ templates:
 
   utter_month:
   - text: "Hi, i am a Bot an know {example}"
+  
+  ##utter_default:
+  ##- text: "Standard default"
+  
 
