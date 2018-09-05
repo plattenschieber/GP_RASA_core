@@ -7,14 +7,14 @@ HTTP-Server für die API des RASA AI Chatbot's.
 * domain.yaml
 
 
-## Getting Started
+## Local Start
 
 Zum starten des Server muss der folgende Befehl ausgeführt werden.
 ```bash
 sh start-server.sh
 ```
 
-### Installation
+## Installation
 
 Zur Installation empfiehlt sich den offiziellen Anweisungen zu folgen, diese sind unter [NLU Installation](http://www.rasa.com/docs/nlu/installation/) zu finden.
 
@@ -24,8 +24,8 @@ Zusätzlich steht einen requirements.txt File bereit. diese kann installiert wer
 pip install -r requirements.txt
 ```
 
-### Docker
-In dem Projekt liegt eine Dockerfile und ein Docker-Compose bei, diese stellen das Projekt als Docker-Container zu Verfügung.
+## Docker
+Diesem Projekt liegt eine Dockerfile und ein Docker-Compose bei, diese stellen das Projekt als Docker-Container zu Verfügung.
 Um das Image zu bauen und zu starten müssen die folgenden Befehle ausgeführt werden.
 
 ```bash
