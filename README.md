@@ -23,3 +23,12 @@ Zusätzlich steht einen requirements.txt File bereit. diese kann installiert wer
 ```bash
 pip install -r requirements.txt
 ```
+
+### Docker
+In dem Projekt liegt eine Dockerfile und ein Docker-Compose bei, diese stellen das Projekt als Docker-Container zu Verfügung.
+Um das Image zu bauen und zu starten müssen die folgenden Befehle ausgeführt werden.
+
+```bash
+docker build -t gpb-chatbot-core . 
+docker-compose -p gpb up
+```

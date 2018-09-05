@@ -1,1 +1,2 @@
 rasa-core==0.11.1
+pytest = 3.7.4

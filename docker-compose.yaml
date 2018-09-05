@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  chatbotcore:
+    image: gpb-chatbot-core
+    restart: always
+    ports:
+      - "5005:5005"
