@@ -1,7 +1,3 @@
 # Custom action endpoint for the bot
 action_endpoint:
   url: http://localhost:5055/webhook
-
-# NLU endpoint for the bot
-nlu_endpoint:
-  url: http://localhost:5005

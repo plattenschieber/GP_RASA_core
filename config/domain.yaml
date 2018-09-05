@@ -1,23 +1,23 @@
 intents:
-  - example_intent
-  - example_intent_with_slot
+  - greet
+  - month
 
 actions:
-- utter_example_action
-- utter_example_action_with_slot
+- utter_greet
+- utter_month
 
 entities:
-  - example
+  - entityName
 
 slots:
-  example:
+  entityName:
     type: text
     initial_value: "value"
 
 templates:
-  utter_example_action:
+  utter_greet:
   - text: "Hi, i am a Bot"
 
-  utter_example_action_with_slot:
+  utter_month:
   - text: "Hi, i am a Bot an know {example}"
 
