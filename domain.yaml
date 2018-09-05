@@ -1,0 +1,23 @@
+intents:
+  - example_intent
+  - example_intent_with_slot
+
+actions:
+- utter_example_action
+- utter_example_action_with_slot
+
+entities:
+  - example
+
+slots:
+  example:
+    type: text
+    initial_value: "value"
+
+templates:
+  utter_example_action:
+  - text: "Hi, i am a Bot"
+
+  utter_example_action_with_slot:
+  - text: "Hi, i am a Bot an know {example}"
+
