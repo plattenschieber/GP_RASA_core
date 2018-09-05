@@ -5,6 +5,7 @@ intents:
 actions:
 - utter_greet
 - utter_month
+- action_print_test
 
 entities:
   - entityName
