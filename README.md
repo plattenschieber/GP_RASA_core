@@ -2,9 +2,9 @@
 HTTP-Server für die API des RASA AI Chatbot's.
 
 ## Dateien
-* *endpoints.yaml* Enthält alle Enpoints, hier werden der Custom-Action Server, der Core sowie der NLU Server eingetragen
+* *endpoints.yaml* Enthält alle Enpoints, hier werden der Custom-Action Server sowie der NLU Server eingetragen
 * *start-server.sh* Startet den Server mit angegebener Konfiguration
-
+* domain.yaml
 
 
 ## Getting Started
@@ -29,6 +29,6 @@ In dem Projekt liegt eine Dockerfile und ein Docker-Compose bei, diese stellen d
 Um das Image zu bauen und zu starten müssen die folgenden Befehle ausgeführt werden.
 
 ```bash
-docker build -t gpb-chatbot-core . 
-docker-compose -p gpb up
+docker build -t gpb-chatbot-core .
+docker-compose -p gpb -f docker/docker-compose.yaml up
 ```

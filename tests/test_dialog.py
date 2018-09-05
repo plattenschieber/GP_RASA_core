@@ -3,8 +3,8 @@ import logging
 from rasa_core.agent import Agent
 from rasa_core.interpreter import RasaNLUInterpreter
 
-rasaNLU = RasaNLUInterpreter("../gpb-chatbot-nlu/models/default/chat")
-agent = Agent.load("models/dialogue", interpreter=rasaNLU)
+rasaNLU = RasaNLUInterpreter("../../gpb-chatbot-nlu/models/default/chat")
+agent = Agent.load("../models/dialogue", interpreter=rasaNLU)
 logging.basicConfig(level='DEBUG')
 
 while True:
