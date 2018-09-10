@@ -1,6 +1,7 @@
 intents:
   - greet
   - month
+  - say_month
 
 actions:
 - utter_greet
@@ -12,18 +13,23 @@ actions:
 
 entities:
   - entityName
+  - month
 
 slots:
   entityName:
     type: text
     initial_value: "value"
 
+  month:
+    type: text
+    initial_value: "Januar"
+
 templates:
   utter_greet:
   - text: "Hi, i am a Bot"
 
   utter_month:
-  - text: "Hi, i am a Bot an know {example}"
+  - text: "Hi, i am a Bot an know {month}"
   
   ##utter_default:
   ##- text: "Standard default"
