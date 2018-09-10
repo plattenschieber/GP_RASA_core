@@ -2,6 +2,7 @@
 * greet
   - utter_greet
   - action_print_test
-* month{"entityName": "someValue"}
+* month
+* say_month
   - utter_month
 
