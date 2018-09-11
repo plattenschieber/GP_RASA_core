@@ -1,4 +1,3 @@
-<<<<<<< HEAD:config/sparte_kfz.md
 ## Begrüßung und allgemeine Fragen
 * greet
 # Wie darf ich Sie ansprechen?
@@ -26,7 +25,7 @@
 ## Story, eigenes Auto beschädigt, Unfallgegner ist bei Zurich versichert und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 # Wurde das eigene Auto beschädigt?
-* is_car_damaged{"car_is_damaged":"true"}
+* is_own_car_damaged{"car_is_damaged":"true"}
 # Ist Ihr Unfallgegner bei der Zurich versichert?
 * is_counterpart_insured_at_zurich{"counterpart_is_insured":"true"}
 > ask_liability_insurant_contact_details
@@ -46,7 +45,7 @@
 # Wie lautet der Vorname des Geschädigten?
 * set_first_name_of_victim{"first_name_injured_party":"susi"}
 # Wie lautet der Nachname des Geschädigten?
-* set_surname_of_victim{"surname_injured_party":"sonnenschein"}
+* set_last_name_of_victim{"surname_injured_party":"sonnenschein"}
 # Falls vorhanden geben Sie mir bitte die Telefonnummer des Geschädigten.
 * set_phone_number_of_victim{"phone_number_injured_party":"987654321"}
 # Falls vorhanden bitte auch noch die Versicherungsnummer des Geschädigten.
@@ -70,7 +69,7 @@
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 # Wurde das eigene Auto beschädigt?
-* is_car_damaged{"car_is_damaged":"false"}
+* is_own_car_damaged{"car_is_damaged":"false"}
 # Wurde der Schaden von Ihrem Auto verursacht?
 * is_damage_caused_by_own_car{"damage_from_own_car":"false"}
 > catastrophe
@@ -127,9 +126,8 @@
 ## Abschließende Fragen, die nach jeder Sparte folgen
 > finish_questioning
 # Nutzer wird gefragt, ob eine Rückrufnummer festgelegt werden soll.
-* set_is_callback_wanted("is_callback_wanted":"true")
+* set_is_callback_wanted{"is_callback_wanted":"true"}
 
-=======
 ## Begrüßung und allgemeine Fragen
 * greet
 # Wie darf ich Sie ansprechen?
@@ -157,7 +155,7 @@
 ## Story, eigenes Auto beschädigt, Unfallgegner ist bei Zurich versichert und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 # Wurde das eigene Auto beschädigt?
-* is_car_damaged{"car_is_damaged":"true"}
+* is_own_car_damaged{"car_is_damaged":"true"}
 # Ist Ihr Unfallgegner bei der Zurich versichert?
 * is_counterpart_insured_at_zurich{"counterpart_is_insured":"true"}
 > ask_liability_insurant_contact_details
@@ -177,7 +175,7 @@
 # Wie lautet der Vorname des Geschädigten?
 * set_first_name_of_victim
 # Wie lautet der Nachname des Geschädigten?
-* set_surname_of_victim
+* set_last_name_of_victim
 # Falls vorhanden geben Sie mir bitte die Telefonnummer des Geschädigten.
 * set_phone_number_of_victim
 # Falls vorhanden bitte auch noch die Versicherungsnummer des Geschädigten.
@@ -201,7 +199,7 @@
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 # Wurde das eigene Auto beschädigt?
-* is_car_damaged{"car_is_damaged":"false"}
+* is_own_car_damaged{"car_is_damaged":"false"}
 # Wurde der Schaden von Ihrem Auto verursacht?
 * is_damage_caused_by_own_car{"damage_from_own_car":"false"}
 > catastrophe
@@ -258,6 +256,4 @@
 ## Abschließende Fragen, die nach jeder Sparte folgen
 > finish_questioning
 # Nutzer wird gefragt, ob eine Rückrufnummer festgelegt werden soll.
-* set_is_callback_wanted("is_callback_wanted":"true")
-
->>>>>>> 163d70858c4e736d74bd1081f6e558516107664a:stories/sparte_kfz.md
+* set_is_callback_wanted{"is_callback_wanted":"true"}
