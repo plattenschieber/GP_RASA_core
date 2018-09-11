@@ -2,16 +2,17 @@
 HTTP-Server für die API des RASA AI Chatbot's.
 
 ## Dateien
-* *endpoints.yaml* Enthält alle Enpoints, hier werden der Custom-Action Server sowie der NLU Server eingetragen
-* *start-server.sh* Startet den Server mit angegebener Konfiguration
+* *endpoints.yaml* Enthält alle Endpoints, hier werden der Custom-Action Server sowie der NLU Server eingetragen
+* *endpoints.docker.yaml* Enthält die Endpoints für docker.
+* *start_core.py* startet Server über custom script.
+* *start-server.sh* Startet den Server mit angegebener Konfiguration.
 * domain.yaml
-
 
 ## Local Start
 
-Zum starten des Server muss der folgende Befehl ausgeführt werden.
+Zum starten des Servers muss der folgende Befehl ausgeführt werden.
 ```bash
-sh start-server.sh
+python src/start_core.py
 ```
 
 ## Installation
