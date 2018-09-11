@@ -119,11 +119,13 @@ slots:
  business_affair:
   type: text
  branch:
-  type: text
+  type: categorical
+  values:
+   - KFZ
  car_is_damaged:
-  type: text
+  type: bool
  counterpart_is_insured:
-  type: text
+  type: bool
  damage_from_own_car:
   type: text
  first_name_insured_party:
@@ -141,7 +143,7 @@ slots:
  insurance_number_injured_party:
   type: text
  insured_party_is_driver:
-  type: text
+  type: bool
  license_plate:
   type: text
  date_of_damage:
@@ -155,7 +157,7 @@ slots:
  current_location_of_car:
   type: text
  is_callback_wanted:
-  type: text
+  type: bool
  callback_phone_number:
   type: text
     

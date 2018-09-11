@@ -133,7 +133,7 @@
 # Wie darf ich Sie ansprechen?
 * set_form_of_address{"form_of_address":"herr"}
 # Wie lautet Ihr Vorname?
-* set_first_name{"forename":"max"}
+* set_first_name{"first_name":"max"}
 # Dankeschön. Wie lautet Ihr Nachname?
 * set_surname{"surname":"mustermann"}
 # Wie lautet Ihre Straße und Hausnummer?
@@ -167,7 +167,7 @@
 # Wurde der Schaden von Ihrem Auto verursacht?
 * is_damage_caused_by_own_car{"damage_from_own_car":"true"}
 # Wie lautet der Vorname des Versicherungsnehmers?
-* set_first_name_other_insured_party{"forename_insured_party":"susi"}
+* set_first_name_other_insured_party{"first_name_insured_party":"susi"}
 # Wie lautet der Nachname des Versicherungsnehmer?
 * set_surname_other_insured_party{"surname_insured_party":"sonnenschein"}
 # Falls vorhanden die Versicherungsnummer des Versicherungsnehmers.
@@ -223,9 +223,6 @@
 # Gab es schon vorher sichtbare Schäden? Wenn ja welche?
 > finish_questioning
 
-## Hat ein naturereignis es beschädigt?
-> catastrophe
-# TODO
 
 ## Haftpflicht Versicherungsnehmer Kontaktdaten
 > ask_liability_insurant_contact_details
@@ -256,4 +253,4 @@
 ## Abschließende Fragen, die nach jeder Sparte folgen
 > finish_questioning
 # Nutzer wird gefragt, ob eine Rückrufnummer festgelegt werden soll.
-* set_is_callback_wanted{"is_callback_wanted":"true"}
+* set_is_callback_wanted{"iis_callback_wanted":"true"}
