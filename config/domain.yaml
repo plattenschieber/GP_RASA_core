@@ -32,6 +32,7 @@ intents:
  - set_is_callback_wanted:
 
 actions:
+ - utter_default
  - utter_greet
  - utter_set_form_of_address
  - utter_set_first_name
@@ -63,11 +64,8 @@ actions:
  - utter_set_first_name_insured_party
  - utter_set_surname_insured_party
  - utter_set_is_callback_wanted
- ## - utter_default um einen default Fallback festzulegen
 
 entities:
- - entityName
- - month
  - form_of_address
  - first_name
  - surname
@@ -100,17 +98,8 @@ entities:
  - callback_phone_number
 
 slots:
- entityName:
-  type: text
-  initial_value: "value"
-
- month:
-  type: text
-  initial_value: "Januar"
-
  form_of_address:
   type: text
-  initial_value: "Kreatur"
  first_name:
   type: text
  surname:
@@ -172,6 +161,8 @@ slots:
   type: text
     
 templates:
+ utter_default:
+   - text: "Default text"
  utter_greet:
    - text: "Hi, i am a Bot"
  utter_set_form_of_address:
@@ -234,10 +225,3 @@ templates:
    - text: "Wie lautet der Nachname des Versicherungsnehmer?"
  utter_set_is_callback_wanted:
    - text: "Möchten Sie für Rückfragen eine Rückrufnummer bei uns hinterlegen?"
- ##utter_month:
-  ##- text: "Hi, i am a Bot an know {month}"
-  
- ##utter_default:
-  ##- text: "Standard default"
-  
-
