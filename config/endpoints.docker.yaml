@@ -1,0 +1,6 @@
+# Custom action endpoint for the bot
+action_endpoint:
+  url: http://docker_chatbotaction_1:5055/webhook
+
+nlu:
+  url: http://docker_chatbot-nlu_1:5000
