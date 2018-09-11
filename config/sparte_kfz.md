@@ -3,7 +3,7 @@
 # Wie darf ich Sie ansprechen?
 * set_form_of_address{"form_of_address":"herr"}
 # Wie lautet Ihr Vorname?
-* set_first_name{"forename":"max"}
+* set_first_name{"first_name":"max"}
 # Dankeschön. Wie lautet Ihr Nachname?
 * set_surname{"surname":"mustermann"}
 # Wie lautet Ihre Straße und Hausnummer?
@@ -11,7 +11,7 @@
 # Nennen Sie mir bitte Ihre Postleitzahl.
 * set_zip_code{"address_zip_code":"12345"}
 # In welchem Ort wohnen Sie?
-* set_city{"address_place":"musterhausen"}
+* set_city{"address_city":"musterhausen"}
 # Unter welcher Telefonnummer können wir Sie am besten erreichen?
 * set_phone_number{"phone_number":"123456"}
 # Wie lautet Ihre E-Mail Adresse?
@@ -37,19 +37,19 @@
 # Wurde der Schaden von Ihrem Auto verursacht?
 * is_damage_caused_by_own_car{"damage_from_own_car":"true"}
 # Wie lautet der Vorname des Versicherungsnehmers?
-* set_first_name_other_insured_party{"forename_insured_party":"susi"}
+* set_first_name_other_insured_party{"first_name_insured_party":"susi"}
 # Wie lautet der Nachname des Versicherungsnehmer?
 * set_surname_other_insured_party{"surname_insured_party":"sonnenschein"}
 # Falls vorhanden die Versicherungsnummer des Versicherungsnehmers.
 * set_insurance_number{"insurance_number":"1234567"}
 # Wie lautet der Vorname des Geschädigten?
-* set_first_name_of_victim
+* set_first_name_of_victim{"first_name_injured_party":"susi"}
 # Wie lautet der Nachname des Geschädigten?
-* set_surname_of_victim
+* set_surname_of_victim{"surname_injured_party":"sonnenschein"}
 # Falls vorhanden geben Sie mir bitte die Telefonnummer des Geschädigten.
-* set_phone_number_of_victim
+* set_phone_number_of_victim{"phone_number_injured_party":"987654321"}
 # Falls vorhanden bitte auch noch die Versicherungsnummer des Geschädigten.
-* set_insurance_number_of_victim
+* set_insurance_number_of_victim{"insurance_number_injured_party":"9876543210"}
 > driver
 
 ## Saßen Sie selbst am Steuer?
@@ -100,7 +100,7 @@
 ## Haftpflicht Versicherungsnehmer Kontaktdaten
 > ask_liability_insurant_contact_details
 # Wie lautet der Vorname des Versicherungsnehmers?
-* set_first_name_insured_party{"forename_insured_party":"susi"}
+* set_first_name_insured_party{"first_name_insured_party":"susi"}
 # Wie lautet der Nachname des Versicherungsnehmer?
 * set_surname_insured_party{"surname_insured_party":"sonnenschein"}
 # Falls vorhanden die Versicherungsnummer des Versicherungsnehmers.
