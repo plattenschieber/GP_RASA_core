@@ -3,15 +3,15 @@
 # Wie darf ich Sie ansprechen?
 * set_form_of_address{"form_of_address":"herr"}
 # Wie lautet Ihr Vorname?
-* set_forename{"forename":"max"}
+* set_first_name{"forename":"max"}
 # Dankeschön. Wie lautet Ihr Nachname?
 * set_surname{"surname":"mustermann"}
 # Wie lautet Ihre Straße und Hausnummer?
-* set_address{"address_street":"musterstrasse", "address_street_number":"11"}
+* set_street_address{"address_street":"musterstrasse", "address_street_number":"11"}
 # Nennen Sie mir bitte Ihre Postleitzahl.
 * set_zip_code{"address_zip_code":"12345"}
 # In welchem Ort wohnen Sie?
-* set_place{"address_place":"musterhausen"}
+* set_city{"address_place":"musterhausen"}
 # Unter welcher Telefonnummer können wir Sie am besten erreichen?
 * set_phone_number{"phone_number":"123456"}
 # Wie lautet Ihre E-Mail Adresse?
@@ -27,25 +27,29 @@
 # Wurde das eigene Auto beschädigt?
 * is_car_damaged{"car_is_damaged":"true"}
 # Ist Ihr Unfallgegner bei der Zurich versichert?
-* is_opponent_insured_at_zurich{"opponent_is_insured":"true"}
+* is_counterpart_insured_at_zurich{"counterpart_is_insured":"true"}
 > ask_liability_insurant_contact_details
 
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 # Wurde das eigene Auto beschädigt?
-* is_car_damaged{"car_is_damaged":"false"}
+* is_own_car_damaged{"car_is_damaged":"false"}
 # Wurde der Schaden von Ihrem Auto verursacht?
-* is_damage_from_own_car{"damage_from_own_car":"true"}
+* is_damage_caused_by_own_car{"damage_from_own_car":"true"}
 # Wie lautet der Vorname des Versicherungsnehmers?
-* set_forename_insured_party{"forename_insured_party":"susi"}
+* set_first_name_other_insured_party{"forename_insured_party":"susi"}
 # Wie lautet der Nachname des Versicherungsnehmer?
-* set_surname_insured_party{"surname_insured_party":"sonnenschein"}
+* set_surname_other_insured_party{"surname_insured_party":"sonnenschein"}
 # Falls vorhanden die Versicherungsnummer des Versicherungsnehmers.
 * set_insurance_number{"insurance_number":"1234567"}
 # Wie lautet der Vorname des Geschädigten?
+* set_first_name_of_victim
 # Wie lautet der Nachname des Geschädigten?
+* set_surname_of_victim
 # Falls vorhanden geben Sie mir bitte die Telefonnummer des Geschädigten.
+* set_phone_number_of_victim
 # Falls vorhanden bitte auch noch die Versicherungsnummer des Geschädigten.
+* set_insurance_number_of_victim
 > driver
 
 ## Saßen Sie selbst am Steuer?
@@ -67,7 +71,7 @@
 # Wurde das eigene Auto beschädigt?
 * is_car_damaged{"car_is_damaged":"false"}
 # Wurde der Schaden von Ihrem Auto verursacht?
-* is_damage_from_own_car{"damage_from_own_car":"false"}
+* is_damage_caused_by_own_car{"damage_from_own_car":"false"}
 > catastrophe
 
 ## Hat ein naturereignis es beschädigt?
@@ -80,11 +84,11 @@
 # Was war die Schadensursache? (z. B. Auffahrunfall oder Parkunfall)
 * set_cause_of_damage{"cause_of_damage":"auffahrunfall"}
 # Wo hat sich der Schaden ereignet? (z. B. Autobahn, innerorts)
-* set_damage_lcoation{"damage_lcoation":"autobahn"}
+* set_damage_location{"damage_location":"autobahn"}
 # Bitte schildern Sie uns kurz den Unfallhergang.
 * set_description_of_accident{"description_of_accident":"auto ist in anderes auto und peng"}
 # Wo kann das Fahrzeug besichtigt werden?
-* set_place_of_car{"place_of_car":"musterstrasse"}
+* set_current_location_of_car{"current_location_of_car":"musterstrasse"}
 # Bitte Schildern Sie uns die Sichtbaren Schäden am Fahrzeug.
 # Gab es schon vorher sichtbare Schäden? Wenn ja welche?
 > finish_questioning
@@ -96,7 +100,7 @@
 ## Haftpflicht Versicherungsnehmer Kontaktdaten
 > ask_liability_insurant_contact_details
 # Wie lautet der Vorname des Versicherungsnehmers?
-* set_forename_insured_party{"forename_insured_party":"susi"}
+* set_first_name_insured_party{"forename_insured_party":"susi"}
 # Wie lautet der Nachname des Versicherungsnehmer?
 * set_surname_insured_party{"surname_insured_party":"sonnenschein"}
 # Falls vorhanden die Versicherungsnummer des Versicherungsnehmers.
@@ -112,15 +116,15 @@
 # Was war die Schadensursache? (z. B. Auffahrunfall oder Parkunfall)
 * set_cause_of_damage{"cause_of_damage":"auffahrunfall"}
 # Wo hat sich der Schaden ereignet? (z. B. Autobahn, innerorts)
-* set_damage_lcoation{"damage_lcoation":"autobahn"}
+* set_damage_location{"damage_location":"autobahn"}
 # Bitte schildern Sie uns kurz den Unfallhergang.
 * set_description_of_accident{"description_of_accident":"auto ist in anderes auto und peng"}
 # Wo kann das Fahrzeug besichtigt werden?
-* set_place_of_car{"place_of_car":"musterstrasse"}
+* set_current_location_of_car{"current_location_of_car":"musterstrasse"}
 > finish_questioning
 
 ## Abschließende Fragen, die nach jeder Sparte folgen
 > finish_questioning
 # Nutzer wird gefragt, ob eine Rückrufnummer festgelegt werden soll.
-* set_callback_number("want_callback_number":"true")
+* set_is_callback_wanted("is_callback_wanted":"true")
 
