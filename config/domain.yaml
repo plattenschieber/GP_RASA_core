@@ -30,6 +30,10 @@ intents:
  - set_first_name_insured_party
  - set_surname_insured_party
  - set_is_callback_wanted
+ - set_form_of_address_of_driver
+ - set_first_name_of_driver
+ - set_surname_of_driver
+
 
 actions:
  - utter_default
@@ -166,6 +170,15 @@ slots:
   callback_phone_number:
     type: text
     
+  form_of_address_of_driver:
+    type: text
+  first_name_of_driver:
+    type: text
+  surname_of_driver:
+    type: text
+  birth_date_of_driver:
+    type: text
+    
 templates:
  utter_default:
    - text: "Default text"
@@ -188,7 +201,7 @@ templates:
  utter_ask_e_mail:
    - text: "Wie lautet Ihre E-Mail Adresse?"
  utter_ask_business_affair:
-   - text: "Handelt es sich bei Ihnen um eine gewerbliche Angelegenheit?"
+   - text: "Handelt es sich bei diesem Fall um eine gewerbliche Angelegenheit?"
  utter_ask_branch_selected:
    - text: "In welcher Sparte möchten Sie einen Versicherungsfall melden?"
  utter_ask_own_car_damaged:
@@ -231,3 +244,13 @@ templates:
    - text: "Wie lautet der Nachname des Versicherungsnehmer?"
  utter_ask_is_callback_wanted:
    - text: "Möchten Sie für Rückfragen eine Rückrufnummer bei uns hinterlegen?"
+ utter_ask_form_of_address_of_driver:
+   - text: "Bitte nennen Sie mir die Anrede des Fahrers." 
+ utter_ask_first_name_of_driver:
+   - text: "Wie lautet der Vorname des Fahrers?"
+ utter_ask_surname_of_driver:
+   - text: "Wie lautet der Nachname des Fahrers?"
+ utter_ask_birth_date_of_driver:
+   - text: "Was ist das Geburtsdatum des Fahrers?"
+
+

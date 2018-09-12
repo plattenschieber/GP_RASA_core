@@ -61,9 +61,13 @@
 > driver
 * is_insured_party_driver{"insured_party_is_driver":"true"}
 # Bitte nennen Sie mir die Anrede des Fahrers.
+* set_form_of_address_of_driver
 # Wie lautet der Vorname des Fahrers?
+* set_first_name_of_driver
 # Wie lautet der Nachname des Fahrers?
+* set_surname_of_driver
 # Wann ist das Geburtsdatum des Fahrers?
+* set_birth_date_of_driver
 > finish_questioning
 
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selbst am Steuer und wird keine Rückrufnummer vereinbart
