@@ -1,24 +1,41 @@
 ## Begrüßung und allgemeine Fragen
 * greet
-# Wie darf ich Sie ansprechen?
-* set_form_of_address{"form_of_address":"herr"}
-# Wie lautet Ihr Vorname?
-* set_first_name{"first_name":"max"}
-# Dankeschön. Wie lautet Ihr Nachname?
-* set_surname{"surname":"mustermann"}
-# Wie lautet Ihre Straße und Hausnummer?
-* set_street_address{"address_street":"musterstrasse", "address_street_number":"11"}
-# Nennen Sie mir bitte Ihre Postleitzahl.
-* set_zip_code{"address_zip_code":"12345"}
-# In welchem Ort wohnen Sie?
-* set_city{"address_city":"musterhausen"}
-# Unter welcher Telefonnummer können wir Sie am besten erreichen?
-* set_phone_number{"phone_number":"123456"}
-# Wie lautet Ihre E-Mail Adresse?
-* set_e_mail{"e_mail":"max@mustermann.de"}
-# Handelt es sich bei Ihnen um eine gewerbliche Angelegenheit?
-* is_business_affair{"business_affair":"false"}
-# Welche in welcher Sparte möchten Sie einen Versicherungsfall melden
+  - utter_greet
+  - utter_set_form_of_address
+* set_form_of_address{"form_of_address":"herr"} OR set_form_of_address{"form_of_address":"frau"} OR set_form_of_address{"form_of_address":"dr"} OR set_form_of_address{"form_of_address":"doktor"}
+  - utter_set_first_name
+* set_first_name{"first_name":"max"} <!-- Regex nötig -->
+  - utter_set_surname
+* set_surname{"surname":"mustermann"} <!-- Regex nötig -->
+  - utter_set_street_address
+* set_street_address{"address_street":"musterstrasse", "address_street_number":"11"} <!-- Regex nötig -->
+  - utter_set_zip_code
+* set_zip_code{"address_zip_code":"12345"} <!-- Regex nötig -->
+  - utter_set_city
+* set_city{"address_city":"musterhausen"} <!-- Regex nötig -->
+  - utter_set_phone_number
+* set_phone_number{"phone_number":"123456"} <!-- Regex nötig -->
+  - utter_set_e_mail
+* set_e_mail{"e_mail":"max@mustermann.de"} <!-- Überprüfung nötig -->
+> follow_business_affair
+
+## Story, business affair ist true
+> follow_business_affair
+- utter_is_business_affair
+* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"} OR is_business_affair{"business_affair":"nein"} OR is_business_affair{"business_affair":"falsch"}
+  - action_set_business_affair
+  - slot{"business_affair":"true"}
+  - utter_branch_selected
+* branch_selected{"branch": "kfz"}
+> follow_kfz_decision_tree
+
+## Story, business affair ist false
+> follow_business_affair
+- utter_is_business_affair
+* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"} OR is_business_affair{"business_affair":"nein"} OR is_business_affair{"business_affair":"falsch"}
+  - action_set_business_affair
+  - slot{"business_affair":"false"}
+  - utter_branch_selected
 * branch_selected{"branch": "kfz"}
 > follow_kfz_decision_tree
 
@@ -61,19 +78,15 @@
 > driver
 * is_insured_party_driver{"insured_party_is_driver":"true"}
 # Bitte nennen Sie mir die Anrede des Fahrers.
-* set_form_of_address_of_driver
 # Wie lautet der Vorname des Fahrers?
-* set_first_name_of_driver
 # Wie lautet der Nachname des Fahrers?
-* set_surname_of_driver
 # Wann ist das Geburtsdatum des Fahrers?
-* set_birth_date_of_driver
 > finish_questioning
 
-## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selbst am Steuer und wird keine Rückrufnummer vereinbart
+## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 # Wurde das eigene Auto beschädigt?
-* is_car_damaged{"car_is_damaged":"unbeschädigt"} OR is_car_damaged{"car_is_damaged":"nein"} 
+* is_car_damaged{"car_is_damaged":"false"}
 # Wurde der Schaden von Ihrem Auto verursacht?
 * is_damage_caused_by_own_car{"damage_from_own_car":"false"}
 > catastrophe
