@@ -69,6 +69,7 @@ actions:
  - utter_ask_surname_insured_party
  - utter_ask_is_callback_wanted
  - action_send_email
+ - action_set_business_affair
 
 entities:
  - form_of_address
