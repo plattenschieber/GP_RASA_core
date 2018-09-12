@@ -22,7 +22,7 @@
 ## Story, business affair ist true
 > follow_business_affair
 - utter_ask_business_affair
-* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"} OR is_business_affair{"business_affair":"nein"} OR is_business_affair{"business_affair":"falsch"}
+* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"}
   - action_set_business_affair
   - slot{"business_affair":"true"}
   - utter_ask_branch_selected
@@ -32,7 +32,7 @@
 ## Story, business affair ist false
 > follow_business_affair
 - utter_ask_business_affair
-* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"} OR is_business_affair{"business_affair":"nein"} OR is_business_affair{"business_affair":"falsch"}
+* is_business_affair{"business_affair":"nein"} OR is_business_affair{"business_affair":"falsch"}
   - action_set_business_affair
   - slot{"business_affair":"false"}
   - utter_ask_branch_selected
@@ -41,31 +41,31 @@
 
 ## Story, eigenes Auto beschädigt, Unfallgegner ist bei Zurich versichert und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
-# Wurde das eigene Auto beschädigt?
+- utter_ask_own_car_damaged
 * is_car_damaged{"car_is_damaged":"true"}
-# Ist Ihr Unfallgegner bei der Zurich versichert?
+  - utter_ask_counterpart_insured_at_zurich
 * is_counterpart_insured_at_zurich{"counterpart_is_insured":"true"}
 > ask_liability_insurant_contact_details
 
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
-# Wurde das eigene Auto beschädigt?
+- utter_ask_own_car_damaged
 * is_car_damaged{"car_is_damaged":"false"}
-# Wurde der Schaden von Ihrem Auto verursacht?
+  - utter_ask_damage_caused_by_own_car
 * is_damage_caused_by_own_car{"damage_from_own_car":"true"}
-# Wie lautet der Vorname des Versicherungsnehmers?
+  - utter_ask_first_name_other_insured_party
 * set_first_name_other_insured_party{"first_name_insured_party":"susi"}
-# Wie lautet der Nachname des Versicherungsnehmer?
+  - utter_ask_surname_other_insured_party
 * set_surname_other_insured_party{"surname_insured_party":"sonnenschein"}
-# Falls vorhanden die Versicherungsnummer des Versicherungsnehmers.
+  - utter_ask_insurance_number
 * set_insurance_number{"insurance_number":"1234567"}
-# Wie lautet der Vorname des Geschädigten?
+  - utter_ask_first_name_of_victim
 * set_first_name_of_victim{"first_name_injured_party":"susi"}
-# Wie lautet der Nachname des Geschädigten?
+  - utter_ask_last_name_of_victim
 * set_surname_of_victim{"surname_injured_party":"sonnenschein"}
-# Falls vorhanden geben Sie mir bitte die Telefonnummer des Geschädigten.
+  - utter_ask_insurance_number_of_victim
 * set_phone_number_of_victim{"phone_number_injured_party":"987654321"}
-# Falls vorhanden bitte auch noch die Versicherungsnummer des Geschädigten.
+  - utter_ask_insurance_number_of_victim
 * set_insurance_number_of_victim{"insurance_number_injured_party":"9876543210"}
 > driver
 
@@ -77,71 +77,71 @@
 ## Saßen Sie selbst am Steuer?
 > driver
 * is_insured_party_driver{"insured_party_is_driver":"true"}
-# Bitte nennen Sie mir die Anrede des Fahrers.
-# Wie lautet der Vorname des Fahrers?
-# Wie lautet der Nachname des Fahrers?
-# Wann ist das Geburtsdatum des Fahrers?
+  - utter_ask_form_of_address_of_driver
+  - utter_ask_first_name_of_driver
+  - utter_ask_surname_of_driver
+  - utter_ask_birth_date_of_driver
 > finish_questioning
 
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
-# Wurde das eigene Auto beschädigt?
+- utter_ask_own_car_damaged
 * is_car_damaged{"car_is_damaged":"false"}
-# Wurde der Schaden von Ihrem Auto verursacht?
+  - utter_ask_damage_caused_by_own_car
 * is_damage_caused_by_own_car{"damage_from_own_car":"false"}
 > catastrophe
 
 ## Hat ein naturereignis es beschädigt?
 > catastrophe
-# TODO
-# Wie lautet das Kennzeichen des geschädigten Autos? (z. B. ZO-E 1234)
+<!-- TODO -->
+- utter_ask_license_plate
 * set_license_plate{"license_plate":"XXXX1234"}
-# Wann hat der Schaden stattgefunden?
+  - utter_ask_date_of_damage
 * set_date_of_damage{"date_of_damage":"12.12.2012"}
-# Was war die Schadensursache? (z. B. Auffahrunfall oder Parkunfall)
+  - utter_ask_cause_of_damage
 * set_cause_of_damage{"cause_of_damage":"auffahrunfall"}
-# Wo hat sich der Schaden ereignet? (z. B. Autobahn, innerorts)
+  - utter_ask_damage_location
 * set_damage_location{"damage_location":"autobahn"}
-# Bitte schildern Sie uns kurz den Unfallhergang.
+  - utter_ask_description_of_accident
 * set_description_of_accident{"description_of_accident":"auto ist in anderes auto und peng"}
-# Wo kann das Fahrzeug besichtigt werden?
+  - utter_ask_current_location_of_car
 * set_current_location_of_car{"current_location_of_car":"musterstrasse"}
-# Bitte Schildern Sie uns die Sichtbaren Schäden am Fahrzeug.
-# Gab es schon vorher sichtbare Schäden? Wenn ja welche?
+<!-- Bitte Schildern Sie uns die Sichtbaren Schäden am Fahrzeug. -->
+<!-- Gab es schon vorher sichtbare Schäden? Wenn ja welche? -->
 > finish_questioning
 
 ## Hat ein naturereignis es beschädigt?
 > catastrophe
-# TODO
+<!-- TODO -->
 
 ## Haftpflicht Versicherungsnehmer Kontaktdaten
 > ask_liability_insurant_contact_details
-# Wie lautet der Vorname des Versicherungsnehmers?
+- utter_ask_first_name_insured_party
 * set_first_name_insured_party{"first_name_insured_party":"susi"}
-# Wie lautet der Nachname des Versicherungsnehmer?
+  - utter_ask_surname_insured_party
 * set_surname_insured_party{"surname_insured_party":"sonnenschein"}
-# Falls vorhanden die Versicherungsnummer des Versicherungsnehmers.
+  - utter_ask_insurance_number
 * set_insurance_number{"insurance_number":"1234567"}
 > ask_kfz_questions
 
 ## Allgemeine KFZ fragen stellen
 > ask_kfz_questions
-# Wie lautet das Kennzeichen des geschädigten Autos? (z. B. ZO-E 1234)
+- utter_ask_license_plate
 * set_license_plate{"license_plate":"XXXX1234"}
-# Wann hat der Schaden stattgefunden?
+  - utter_ask_date_of_damage
 * set_date_of_damage{"date_of_damage":"12.12.2012"}
-# Was war die Schadensursache? (z. B. Auffahrunfall oder Parkunfall)
+  - utter_ask_cause_of_damage
 * set_cause_of_damage{"cause_of_damage":"auffahrunfall"}
-# Wo hat sich der Schaden ereignet? (z. B. Autobahn, innerorts)
+  - utter_ask_damage_location
 * set_damage_location{"damage_location":"autobahn"}
-# Bitte schildern Sie uns kurz den Unfallhergang.
+  - utter_ask_description_of_accident
 * set_description_of_accident{"description_of_accident":"auto ist in anderes auto und peng"}
-# Wo kann das Fahrzeug besichtigt werden?
+  - utter_ask_current_location_of_car
 * set_current_location_of_car{"current_location_of_car":"musterstrasse"}
 > finish_questioning
 
 ## Abschließende Fragen, die nach jeder Sparte folgen
 > finish_questioning
-# Nutzer wird gefragt, ob eine Rückrufnummer festgelegt werden soll.
+- utter_ask_is_callback_wanted
 * set_is_callback_wanted{"is_callback_wanted":"true"}
 
