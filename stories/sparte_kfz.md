@@ -66,7 +66,7 @@
 # Wann ist das Geburtsdatum des Fahrers?
 > finish_questioning
 
-## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
+## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selbst am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 # Wurde das eigene Auto beschädigt?
 * is_car_damaged{"car_is_damaged":"false"}
