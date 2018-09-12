@@ -17,7 +17,11 @@ Zum starten des Servers muss der folgende Befehl ausgeführt werden.
 ```bash
 python src/start_core.py
 ```
-
+Alternativ kann für beides auch
+```bash
+sh start-server.sh
+```
+Ausgeführt werden.
 Aufrufen des Servers erfolgt über eine query:
 ```
 http://localhost:5005/conversations/default/respond?query=hi
