@@ -6,7 +6,7 @@ HTTP-Server für die API des RASA AI Chatbot's.
 * *endpoints.docker.yaml* Enthält die Endpoints für docker.
 * *start_core.py* startet den Core Server.
 * *start-server.sh* Trainiert das Model und startet den Server mit angegebener Konfiguration.
-* domain.yaml
+* *domain.yaml* Beschreibt die existierenden Intents, Entities und Sots
 
 ## Local Start
 Zum trainieren eines Modells wird folgender Befehl ausgeführt:
