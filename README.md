@@ -41,3 +41,9 @@ Um das Image zu bauen und zu starten müssen die folgenden Befehle ausgeführt w
 docker build -t chatbot-core .
 docker-compose -p gpb -f docker/docker-compose.yaml up
 ```
+
+Im Docker-Compose kann das Startverhalten des Servers mit verschiedenen environment-variablen angepasst werden:
+* *REST_API_PORT* Setzt den Port für den Restendpoint des Webservers (Default: 5005)
+* *DIALOGUE_MODEL_DIR* Setzt den Pfad in dem Sich das Modell befindet (Default: models/dialogue)
+* *ENABLE_DEBUG* Setzt das loglevel auf Debug (Default: Info)
+* *ENDPOINTS_CONFIG_FILE* Setzt den Pfad zur Konfiguration der endpoints (Default: config/endpoints.yaml)
