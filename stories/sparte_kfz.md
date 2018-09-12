@@ -1,41 +1,41 @@
 ## Begrüßung und allgemeine Fragen
 * greet
   - utter_greet
-  - utter_set_form_of_address
+  - utter_ask_form_of_address
 * set_form_of_address{"form_of_address":"herr"} OR set_form_of_address{"form_of_address":"frau"} OR set_form_of_address{"form_of_address":"dr"} OR set_form_of_address{"form_of_address":"doktor"}
-  - utter_set_first_name
+  - utter_ask_first_name
 * set_first_name{"first_name":"max"} <!-- Regex nötig -->
-  - utter_set_surname
+  - utter_ask_surname
 * set_surname{"surname":"mustermann"} <!-- Regex nötig -->
-  - utter_set_street_address
+  - utter_ask_street_address
 * set_street_address{"address_street":"musterstrasse", "address_street_number":"11"} <!-- Regex nötig -->
-  - utter_set_zip_code
+  - utter_ask_zip_code
 * set_zip_code{"address_zip_code":"12345"} <!-- Regex nötig -->
-  - utter_set_city
+  - utter_ask_city
 * set_city{"address_city":"musterhausen"} <!-- Regex nötig -->
-  - utter_set_phone_number
+  - utter_ask_phone_number
 * set_phone_number{"phone_number":"123456"} <!-- Regex nötig -->
-  - utter_set_e_mail
+  - utter_ask_e_mail
 * set_e_mail{"e_mail":"max@mustermann.de"} <!-- Überprüfung nötig -->
 > follow_business_affair
 
 ## Story, business affair ist true
 > follow_business_affair
-- utter_is_business_affair
+- utter_ask_business_affair
 * is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"} OR is_business_affair{"business_affair":"nein"} OR is_business_affair{"business_affair":"falsch"}
   - action_set_business_affair
   - slot{"business_affair":"true"}
-  - utter_branch_selected
+  - utter_ask_branch_selected
 * branch_selected{"branch": "kfz"}
 > follow_kfz_decision_tree
 
 ## Story, business affair ist false
 > follow_business_affair
-- utter_is_business_affair
+- utter_ask_business_affair
 * is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"} OR is_business_affair{"business_affair":"nein"} OR is_business_affair{"business_affair":"falsch"}
   - action_set_business_affair
   - slot{"business_affair":"false"}
-  - utter_branch_selected
+  - utter_ask_branch_selected
 * branch_selected{"branch": "kfz"}
 > follow_kfz_decision_tree
 
@@ -50,7 +50,7 @@
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 # Wurde das eigene Auto beschädigt?
-* is_own_car_damaged{"car_is_damaged":"false"}
+* is_car_damaged{"car_is_damaged":"false"}
 # Wurde der Schaden von Ihrem Auto verursacht?
 * is_damage_caused_by_own_car{"damage_from_own_car":"true"}
 # Wie lautet der Vorname des Versicherungsnehmers?
