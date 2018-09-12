@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-python src/start_core.py
+python src/train_dialog.py && python src/start_core.py
 
