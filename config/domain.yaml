@@ -118,17 +118,21 @@ slots:
   e_mail:
     type: text
   business_affair:
-    type: text
+    type: bool
   branch:
     type: categorical
     values:
-    - KFZ
+    - kfz
+    - haftpflicht 
+    - unfall 
+    - hausrat 
+    - rechtschutz
   car_is_damaged:
     type: bool
   counterpart_is_insured:
     type: bool
   damage_from_own_car:
-    type: text
+    type: bool
   first_name_insured_party:
     type: text
   surname_insured_party:
