@@ -18,6 +18,11 @@ Zum starten des Servers muss der folgende Befehl ausgeführt werden.
 python src/start_core.py
 ```
 
+Aufrufen des Servers erfolgt über eine query:
+```
+http://localhost:5005/conversations/default/respond?query=hi
+```
+
 ## Installation
 
 Zur Installation empfiehlt sich den offiziellen Anweisungen zu folgen, diese sind unter [NLU Installation](http://www.rasa.com/docs/nlu/installation/) zu finden.
@@ -33,6 +38,6 @@ Diesem Projekt liegt eine Dockerfile und ein Docker-Compose bei, diese stellen d
 Um das Image zu bauen und zu starten müssen die folgenden Befehle ausgeführt werden.
 
 ```bash
-docker build -t gpb-chatbot-core .
+docker build -t chatbot-core .
 docker-compose -p gpb -f docker/docker-compose.yaml up
 ```
