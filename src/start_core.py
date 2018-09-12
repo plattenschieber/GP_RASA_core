@@ -5,6 +5,7 @@ from rasa_core.run import serve_application
 import logging
 from collections import namedtuple
 import argparse
+import os
 
 def read_endpoints(endpoint_file):
     AvailableEndpoints = namedtuple('AvailableEndpoints', 'nlg '
@@ -24,24 +25,16 @@ def read_endpoints(endpoint_file):
     return AvailableEndpoints(nlg, nlu, action, model)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Startscript for Rasa Core")
-    parser.add_argument("-P", "--Port", help="Port on which the Webserver listen", required=False, default=5005, type=int)
-    parser.add_argument("-M", "--Model", help="Path to dialogue model", required=False, default="models/dialogue")
-    parser.add_argument("-D", "--Debug", help="Set loglevel to debug", required=False, action='store_true')
-    parser.add_argument("-E", "--Endpoints", help="Set file with endpoints", required=False, default="config/endpoints.yaml")
-    argument = parser.parse_args()
-
     logger = logging.getLogger()
-    if argument.Debug:
-        logger.setLevel(logging.DEBUG)
-    # For logging in a logfile use following command
-    # utils.configure_file_logging(loglevel=logging.INFO, logfile="./logs/out.log")
-    endpoints = read_endpoints(argument.Endpoints)
+    rest_api_port = int(os.environ['REST_API_PORT']) if "REST_API_PORT" in os.environ else 5005
+    dialogue_model_path = os.environ['DIALOGUE_MODEL_DIR'] if "DIALOGUE_MODEL_DIR" in os.environ else "models/dialogue"
+    enable_debug = logger.setLevel(logging.DEBUG) if "ENABLE_DEBUG" in os.environ else logger.setLevel(logging.INFO)
+    endpoints = read_endpoints(os.environ['ENDPOINTS_CONFIG_FILE']) if "DIALOGUE_MODEL_DIR" in os.environ else read_endpoints("config/endpoints.yaml")
 
     rasaNLU = RasaNLUHttpInterpreter(project_name="default", endpoint=endpoints.nlu)
     logger.info("Load Agent")
-    agent = Agent.load(argument.Model,
+    agent = Agent.load(dialogue_model_path,
                        interpreter=rasaNLU,
                        action_endpoint=endpoints.action)
 
-    serve_application(agent, port=argument.Port, enable_api=True)
+    serve_application(agent, port= rest_api_port, enable_api=True)

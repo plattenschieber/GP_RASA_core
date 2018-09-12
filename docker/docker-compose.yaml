@@ -3,6 +3,11 @@ version: '3'
 services:
   chatbot-core:
     image: chatbot-core
+    environment:
+      - REST_API_PORT=5004
+      - DIALOGUE_MODEL_DIR=models/dialogue
+      - ENABLE_DEBUG
+      - ENDPOINTS_CONFIG_FILE=config/endpoints.docker.yaml
     restart: always
     ports:
-      - "5005:5005"
+      - "5004:5004"
