@@ -68,6 +68,10 @@ actions:
  - utter_ask_first_name_insured_party
  - utter_ask_surname_insured_party
  - utter_ask_is_callback_wanted
+ - utter_ask_form_of_address_of_driver
+ - utter_ask_first_name_of_driver
+ - utter_ask_surname_of_driver
+ - utter_ask_birth_date_of_driver
  - action_send_email
  - action_set_business_affair
 
