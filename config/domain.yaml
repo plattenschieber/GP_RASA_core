@@ -220,9 +220,9 @@ slots:
 
 templates:
  utter_default:
-   - text: "Default text"
+   - text: "Leider habe ich Sie nicht verstanden."
  utter_greet:
-   - text: "Hi, i am a Bot"
+   - text: "Hi, ich bin Zoe"
  utter_ask_form_of_address:
    - text: "Wie darf ich Sie ansprechen?"
  utter_ask_first_name:
