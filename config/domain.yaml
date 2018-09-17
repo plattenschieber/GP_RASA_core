@@ -82,7 +82,7 @@ actions:
  - utter_ask_natural_phenomenon
  - utter_ask_visible_damage_after
  - utter_ask_visible_damage_before
- - utter_ask_phone_number
+ - utter_ask_callback_phone_number
  - utter_goodbye
  - utter_abbruch
  - action_send_email
