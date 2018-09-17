@@ -32,14 +32,15 @@ def read_endpoints(endpoint_file):
 
 
 def start_server(dialogue_model_path, endpoints):
-    rest_api_port = int(os.environ['REST_API_PORT']) if "REST_API_PORT" in os.environ else 5005
+    socket_port = int(os.environ['SOCKET_PORT']) if "SOCKET_PORT" in os.environ else 5005
     server_endpoints = read_endpoints(endpoints)
     rasaNLU = RasaNLUHttpInterpreter(project_name="default", endpoint=server_endpoints.nlu)
 
     agent = Agent.load(dialogue_model_path,
                        interpreter=rasaNLU,
                        action_endpoint=server_endpoints.action)
-    logger.info("Start Webserver on Port " + str(rest_api_port))
+
+
 
     channel = "cmdline"
     if "DISABLE_CMD" in os.environ:
@@ -53,8 +54,10 @@ def start_server(dialogue_model_path, endpoints):
         # socket.io namespace to use for the messages
         namespace=None
     )
-    agent.handle_channels([input_channel], 5005)
-    # serve_application(agent, channel=channel, port=rest_api_port, enable_api=True)
+
+    logger.info("Start socket server on Port " + str(socket_port))
+    agent.handle_channels([input_channel], socket_port)
+    # serve_application(agent, channel=channel, port=socket_port, enable_api=True)
 
 
 def start_online_training(dialogue_model_path, endpoints):
