@@ -1,10 +1,9 @@
 import logging
 
 from rasa_core.agent import Agent
-from rasa_core.policies.memoization import MemoizationPolicy
 from rasa_core.policies.fallback import FallbackPolicy
 from rasa_core.policies.keras_policy import KerasPolicy
-from rasa_core.agent import Agent
+from rasa_core.policies.memoization import MemoizationPolicy
 
 fallback = FallbackPolicy(fallback_action_name="action_default_fallback",
                           core_threshold=0.3,

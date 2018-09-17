@@ -11,3 +11,7 @@ services:
       - DISABLE_CMD=true
     ports:
       - "5005:5005"
+    networks:
+      - chatbot
+  networks:
+    - chatbot
