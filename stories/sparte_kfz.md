@@ -22,7 +22,7 @@
 ## Story, business affair ist true
 > follow_business_affair
 - utter_ask_business_affair
-* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"}
+* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"}
   - action_set_business_affair
   - slot{"business_affair":"true"}
   - utter_ask_branch_selected
@@ -42,7 +42,8 @@
 ## Story, eigenes Auto beschädigt, Unfallgegner ist bei Zurich versichert und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 - utter_ask_own_car_damaged
-* is_car_damaged{"car_is_damaged":"true"}
+* is_car_damaged{"car_is_damaged":"wahr"} OR is_car_damaged{"car_is_damaged":"beschädigt"} OR is_car_damaged{"car_is_damaged":"ja"}
+  - action_is_car_damaged
   - utter_ask_counterpart_insured_at_zurich
 * is_counterpart_insured_at_zurich{"counterpart_is_insured":"true"}
 > ask_liability_insurant_contact_details
@@ -50,9 +51,10 @@
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 - utter_ask_own_car_damaged
-* is_car_damaged{"car_is_damaged":"false"}
+* is_car_damaged{"car_is_damaged":"falsch"} OR is_car_damaged{"car_is_damaged":"unbeschädigt"} OR is_car_damaged{"car_is_damaged":"nein"}
+  - action_is_car_damaged
   - utter_ask_damage_caused_by_own_car
-* is_damage_caused_by_own_car{"damage_from_own_car":"true"}
+* is_damage_caused_by_own_car{"damage_from_own_car":"wahr"} OR is_damage_caused_by_own_car{"damage_from_own_car":"ja"} OR is_damage_caused_by_own_car{"damage_from_own_car":"richtig"}
   - utter_ask_first_name_other_insured_party
 * set_first_name_other_insured_party{"first_name_insured_party":"susi"}
   - utter_ask_surname_other_insured_party

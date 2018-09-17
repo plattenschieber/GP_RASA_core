@@ -35,6 +35,7 @@ Zusätzlich steht einen requirements.txt File bereit. diese kann installiert wer
 
 ```bash
 pip install -r requirements.txt
+pip install -r ./rasa-addons/requirements.txt
 ```
 
 ## Docker
@@ -51,3 +52,4 @@ Im Docker-Compose kann das Startverhalten des Servers mit verschiedenen environm
 * *DIALOGUE_MODEL_DIR* Setzt den Pfad in dem Sich das Modell befindet (Default: models/dialogue)
 * *ENABLE_DEBUG* Setzt das loglevel auf Debug (Default: Info)
 * *ENDPOINTS_CONFIG_FILE* Setzt den Pfad zur Konfiguration der endpoints (Default: config/endpoints.yaml)
+* *DISABLE_CMD* Deaktiviert die verwendung der Command-Line als Eingabemedium

@@ -1,8 +1,7 @@
-FROM rasa/rasa_core
+FROM rasa/rasa_core:0.12.0a2
 #workdir
 COPY . /chatbot
 WORKDIR /chatbot
-RUN pip install -r ./rasa-addons/requirements.txt
 
 EXPOSE 5005
 
