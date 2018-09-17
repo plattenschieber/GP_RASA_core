@@ -8,7 +8,6 @@ services:
       - DIALOGUE_MODEL_DIR=models/dialogue
       - ENABLE_DEBUG=true
       - ENDPOINTS_CONFIG_FILE=config/endpoints.docker.yaml
-      - DISABLE_CMD=true
     ports:
       - "5005:5005"
     networks:
