@@ -4,7 +4,7 @@ services:
   chatbot-core:
     image: docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest
     environment:
-      - REST_API_PORT=5005
+      - SOCKET_PORT=5005
       - DIALOGUE_MODEL_DIR=models/dialogue
       - ENABLE_DEBUG=true
       - ENDPOINTS_CONFIG_FILE=config/endpoints.docker.yaml
