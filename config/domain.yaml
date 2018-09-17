@@ -74,6 +74,7 @@ actions:
  - utter_ask_birth_date_of_driver
  - action_send_email
  - action_set_business_affair
+ - action_set_callback
 
 entities:
  - form_of_address
