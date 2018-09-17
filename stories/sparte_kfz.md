@@ -43,7 +43,8 @@
 * confirm
   - slot{"car_is_damaged":"true"}
   - utter_ask_counterpart_insured_at_zurich
-* is_counterpart_insured_at_zurich{"counterpart_is_insured":"true"}
+* confirm
+  - slot{"counterpart_is_insured":"true"}
 > ask_liability_insurant_contact_details
 
 ## Story, eigenes Auto beschädigt, Unfallgegner ist nicht bei Zurich versichert
