@@ -1,15 +1,17 @@
-from rasa_core.interpreter import RasaNLUHttpInterpreter
-from rasa_core.agent import Agent
-from rasa_core import train
-from rasa_core.training import online
-from rasa_core import utils
-from rasa_core.run import serve_application
 import logging
-from collections import namedtuple
-from rasa_core.channels.socketio import SocketIOInput
 import os
+from collections import namedtuple
+
+from rasa_core import train
+from rasa_core import utils
+from rasa_core.agent import Agent
+from rasa_core.channels.socketio import SocketIOInput
+from rasa_core.interpreter import RasaNLUHttpInterpreter
+from rasa_core.training import online
+
 logging.basicConfig()
 logger = logging.getLogger('logger')
+
 
 def read_endpoints(endpoint_file):
     AvailableEndpoints = namedtuple('AvailableEndpoints', 'nlg '
@@ -27,6 +29,7 @@ def read_endpoints(endpoint_file):
                                        endpoint_type="models")
 
     return AvailableEndpoints(nlg, nlu, action, model)
+
 
 def start_server(dialogue_model_path, endpoints):
     rest_api_port = int(os.environ['REST_API_PORT']) if "REST_API_PORT" in os.environ else 5005
@@ -51,11 +54,10 @@ def start_server(dialogue_model_path, endpoints):
         namespace=None
     )
     agent.handle_channels([input_channel], 5005)
-    #serve_application(agent, channel=channel, port=rest_api_port, enable_api=True)
+    # serve_application(agent, channel=channel, port=rest_api_port, enable_api=True)
 
 
 def start_online_training(dialogue_model_path, endpoints):
-
     learn_parameter = {
         "epochs": 100,
         "batch_size": 20,
@@ -72,6 +74,7 @@ def start_online_training(dialogue_model_path, endpoints):
         kwargs=learn_parameter)
     online.serve_application(agent, serve_forever=True)
 
+
 if __name__ == '__main__':
     logger.setLevel(logging.DEBUG if "ENABLE_DEBUG" in os.environ else logging.INFO)
     dialogue_model_path = os.environ['DIALOGUE_MODEL_DIR'] if "DIALOGUE_MODEL_DIR" in os.environ else "models/dialogue"
@@ -80,4 +83,3 @@ if __name__ == '__main__':
         start_online_training(dialogue_model_path, endpoints)
     else:
         start_server(dialogue_model_path, endpoints)
-
