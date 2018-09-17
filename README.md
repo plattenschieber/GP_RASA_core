@@ -35,6 +35,7 @@ Zusätzlich steht einen requirements.txt File bereit. diese kann installiert wer
 
 ```bash
 pip install -r requirements.txt
+pip install -r ./rasa-addons/requirements.txt
 ```
 
 ## Docker
