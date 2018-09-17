@@ -188,6 +188,7 @@
 ## Abschließende Fragen, die nach jeder Sparte folgen
 > finish_questioning
 - utter_ask_is_callback_wanted
-* set_is_callback_wanted{"is_callback_wanted":"nein"} OR set_is_callback_wanted{"is_callback_wanted":"ungerne"}
-- utter_goodbye
-- action_send_email
+* deny
+  - slot{"is_callback_wanted":"false"} 
+  - utter_goodbye
+  - action_send_email
