@@ -1,17 +1,17 @@
-from rasa_core.interpreter import RasaNLUHttpInterpreter
-from rasa_core.agent import Agent
-from rasa_core import train
-from rasa_core.training import online
-from rasa_core import utils
-from rasa_core.run import serve_application
 import logging
-from collections import namedtuple
-from rasa_core.channels.channel import RestInput
-from rasa_core.channels.socketio import SocketIOInput
 import os
+from collections import namedtuple
+from rasa_core import train
+from rasa_core import utils
+from rasa_core.agent import Agent
+from rasa_core.channels.socketio import SocketIOInput
+from rasa_core.channels.channel import RestInput
+from rasa_core.interpreter import RasaNLUHttpInterpreter
+from rasa_core.training import online
 
 logging.basicConfig()
 logger = logging.getLogger('logger')
+
 
 def read_endpoints(endpoint_file):
     AvailableEndpoints = namedtuple('AvailableEndpoints', 'nlg '
@@ -30,15 +30,15 @@ def read_endpoints(endpoint_file):
 
     return AvailableEndpoints(nlg, nlu, action, model)
 
+
 def start_server(dialogue_model_path, endpoints):
-    rest_api_port = int(os.environ['REST_API_PORT']) if "REST_API_PORT" in os.environ else 5005
+    socket_port = int(os.environ['SOCKET_PORT']) if "SOCKET_PORT" in os.environ else 5005
     server_endpoints = read_endpoints(endpoints)
     rasaNLU = RasaNLUHttpInterpreter(project_name="default", endpoint=server_endpoints.nlu)
 
     agent = Agent.load(dialogue_model_path,
                        interpreter=rasaNLU,
                        action_endpoint=server_endpoints.action)
-    logger.info("Start Webserver on Port " + str(rest_api_port))
 
     channels = [
         SocketIOInput(
@@ -52,10 +52,11 @@ def start_server(dialogue_model_path, endpoints):
         RestInput()
     ]
 
-    agent.handle_channels([channels], 5005)
+    agent.handle_channels(channels, socket_port)
+
+
 
 def start_online_training(dialogue_model_path, endpoints):
-
     learn_parameter = {
         "epochs": 100,
         "batch_size": 20,
@@ -72,6 +73,7 @@ def start_online_training(dialogue_model_path, endpoints):
         kwargs=learn_parameter)
     online.serve_application(agent, serve_forever=True)
 
+
 if __name__ == '__main__':
     logger.setLevel(logging.DEBUG if "ENABLE_DEBUG" in os.environ else logging.INFO)
     dialogue_model_path = os.environ['DIALOGUE_MODEL_DIR'] if "DIALOGUE_MODEL_DIR" in os.environ else "models/dialogue"
@@ -80,4 +82,3 @@ if __name__ == '__main__':
         start_online_training(dialogue_model_path, endpoints)
     else:
         start_server(dialogue_model_path, endpoints)
-

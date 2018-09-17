@@ -34,7 +34,6 @@ intents:
  - set_first_name_of_driver
  - set_surname_of_driver
 
-
 actions:
  - utter_default
  - utter_greet
@@ -74,6 +73,8 @@ actions:
  - utter_ask_birth_date_of_driver
  - action_send_email
  - action_set_business_affair
+ - action_set_callback
+ - action_is_car_damaged
 
 entities:
  - form_of_address
