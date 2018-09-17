@@ -40,7 +40,6 @@ intents:
  - set_date_and_time_reachability
  - set_callback_phone_number
 
-
 actions:
  - utter_default
  - utter_greet
