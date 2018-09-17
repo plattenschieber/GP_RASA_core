@@ -88,9 +88,10 @@
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 - utter_ask_own_car_damaged
-* is_car_damaged{"car_is_damaged":"false"}
+* is_car_damaged{"car_is_damaged":"falsch"} OR is_car_damaged{"car_is_damaged":"unbeschädigt"} OR is_car_damaged{"car_is_damaged":"nein"}
+  - action_is_car_damaged
   - utter_ask_damage_caused_by_own_car
-* is_damage_caused_by_own_car{"damage_from_own_car":"false"}
+* is_damage_caused_by_own_car{"damage_from_own_car":"falsch"} OR is_damage_caused_by_own_car{"damage_from_own_car":"nein"} OR is_damage_caused_by_own_car{"damage_from_own_car":"nicht verursacht"}
 > catastrophe
 
 ## Hat ein naturereignis es beschädigt?
