@@ -6,8 +6,10 @@ from rasa_core import utils
 from rasa_core.run import serve_application
 import logging
 from collections import namedtuple
+from rasa_core.channels.channel import RestInput
 from rasa_core.channels.socketio import SocketIOInput
 import os
+
 logging.basicConfig()
 logger = logging.getLogger('logger')
 
@@ -38,21 +40,19 @@ def start_server(dialogue_model_path, endpoints):
                        action_endpoint=server_endpoints.action)
     logger.info("Start Webserver on Port " + str(rest_api_port))
 
-    channel = "cmdline"
-    if "DISABLE_CMD" in os.environ:
-        channel = None
+    channels = [
+        SocketIOInput(
+            # event name for messages sent from the user
+            user_message_evt="user_uttered",
+            # event name for messages sent from the bot
+            bot_message_evt="bot_uttered",
+            # socket.io namespace to use for the messages
+            namespace=None
+        ),
+        RestInput()
+    ]
 
-    input_channel = SocketIOInput(
-        # event name for messages sent from the user
-        user_message_evt="user_uttered",
-        # event name for messages sent from the bot
-        bot_message_evt="bot_uttered",
-        # socket.io namespace to use for the messages
-        namespace=None
-    )
-    agent.handle_channels([input_channel], 5005)
-    #serve_application(agent, channel=channel, port=rest_api_port, enable_api=True)
-
+    agent.handle_channels([channels], 5005)
 
 def start_online_training(dialogue_model_path, endpoints):
 
