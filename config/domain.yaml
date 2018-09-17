@@ -39,6 +39,8 @@ intents:
  - set_visible_damage_before
  - set_date_and_time_reachability
  - set_callback_phone_number
+ - confirm
+ - deny
 
 actions:
  - utter_default
