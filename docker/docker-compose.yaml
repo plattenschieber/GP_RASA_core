@@ -6,7 +6,6 @@ services:
     environment:
       - DIALOGUE_MODEL_DIR=models/dialogue
       - ENABLE_DEBUG=true
-      - DISABLE_CMD=true
     networks:
       - chatbot
 networks:
