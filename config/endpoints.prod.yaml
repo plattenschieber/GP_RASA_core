@@ -1,0 +1,6 @@
+# Custom action endpoint for the bot
+action_endpoint:
+  url: http://chatbot-action:5055/webhook
+
+nlu:
+  url: http://chatbot-nlu:5000

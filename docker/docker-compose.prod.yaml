@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  chatbot-core:
+    environment:
+      - SOCKET_PORT=5005
+      - ENDPOINTS_CONFIG_FILE=config/endpoints.prod.yaml
+    ports:
+      - "5005:5005"
+    networks:
+      - chatbot
+networks:
+  chatbot:
+    external: true
