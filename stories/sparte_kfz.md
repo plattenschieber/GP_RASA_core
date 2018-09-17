@@ -22,7 +22,7 @@
 ## Story, business affair ist true
 > follow_business_affair
 - utter_ask_business_affair
-* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"}
+* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"}
   - action_set_business_affair
   - slot{"business_affair":"true"}
   - utter_ask_branch_selected
