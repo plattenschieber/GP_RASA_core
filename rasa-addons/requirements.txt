@@ -1,7 +1,0 @@
-flask
-flask_socketio
-flask_cors
-pyyaml
-jsonmerge
-rasa_core
-schema==0.6.8
