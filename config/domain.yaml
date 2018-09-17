@@ -33,6 +33,8 @@ intents:
  - set_form_of_address_of_driver
  - set_first_name_of_driver
  - set_surname_of_driver
+ - confirm
+ - deny
 
 actions:
  - utter_default
@@ -75,6 +77,8 @@ actions:
  - action_set_business_affair
  - action_set_callback
  - action_is_car_damaged
+ - action_set_car_damaged_true
+ - action_set_car_damaged_false
 
 entities:
  - form_of_address
