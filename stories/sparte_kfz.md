@@ -22,9 +22,7 @@
 ## Story, business affair ist true
 > follow_business_affair
 - utter_ask_business_affair
-* is_business_affair{"business_affair":"ja"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"}
-  - action_set_business_affair
-  - slot{"business_affair":"true"}
+* is_business_affair{"business_affair":"true"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"}
   - utter_ask_branch_selected
 * branch_selected{"branch": "kfz"}
 > follow_kfz_decision_tree
@@ -32,9 +30,7 @@
 ## Story, business affair ist false
 > follow_business_affair
 - utter_ask_business_affair
-* is_business_affair{"business_affair":"nein"} OR is_business_affair{"business_affair":"falsch"}
-  - action_set_business_affair
-  - slot{"business_affair":"false"}
+* is_business_affair{"business_affair":"false"} OR is_business_affair{"business_affair":"falsch"}
   - utter_ask_branch_selected
 * branch_selected{"branch": "kfz"}
 > follow_kfz_decision_tree
@@ -42,19 +38,37 @@
 ## Story, eigenes Auto beschädigt, Unfallgegner ist bei Zurich versichert und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 - utter_ask_own_car_damaged
-* is_car_damaged{"car_is_damaged":"wahr"} OR is_car_damaged{"car_is_damaged":"beschädigt"} OR is_car_damaged{"car_is_damaged":"ja"}
-  - action_is_car_damaged
+* is_car_damaged{"car_is_damaged":"true"} OR is_car_damaged{"car_is_damaged":"beschädigt"} OR is_car_damaged{"car_is_damaged":"ja"}
   - utter_ask_counterpart_insured_at_zurich
 * is_counterpart_insured_at_zurich{"counterpart_is_insured":"true"}
 > ask_liability_insurant_contact_details
 
+## Story, eigenes Auto beschädigt, Unfallgegner ist nicht bei Zurich versichert
+> follow_kfz_decision_tree
+- utter_ask_own_car_damaged
+* is_car_damaged{"car_is_damaged":"false"}
+  - utter_ask_counterpart_insured_at_zurich
+* is_counterpart_insured_at_zurich{"counterpart_is_insured":"false"}
+  - utter_abbruch
+
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 - utter_ask_own_car_damaged
-* is_car_damaged{"car_is_damaged":"falsch"} OR is_car_damaged{"car_is_damaged":"unbeschädigt"} OR is_car_damaged{"car_is_damaged":"nein"}
-  - action_is_car_damaged
+* is_car_damaged{"car_is_damaged":"false"} OR is_car_damaged{"car_is_damaged":"unbeschädigt"} OR is_car_damaged{"car_is_damaged":"nein"}
   - utter_ask_damage_caused_by_own_car
-* is_damage_caused_by_own_car{"damage_from_own_car":"wahr"} OR is_damage_caused_by_own_car{"damage_from_own_car":"ja"} OR is_damage_caused_by_own_car{"damage_from_own_car":"richtig"}
+* is_damage_caused_by_own_car{"damage_from_own_car":"true"}<!-- False Fall? --!>
+  - utter_ask_license_plate
+* set_license_plate{"license_plate":"XXXX1234"}
+  - utter_ask_date_of_damage
+* set_date_of_damage{"date_of_damage":"12.12.2012"}
+  - utter_ask_cause_of_damage
+* set_cause_of_damage{"cause_of_damage":"auffahrunfall"}
+  - utter_ask_damage_location
+* set_damage_location{"damage_location":"autobahn"}
+  - utter_ask_description_of_accident
+* set_description_of_accident{"description_of_accident":"auto ist in anderes auto und peng"}
+  - utter_ask_current_location_of_car
+* set_current_location_of_car{"current_location_of_car":"musterstrasse"}
   - utter_ask_first_name_other_insured_party
 * set_first_name_other_insured_party{"first_name_insured_party":"susi"}
   - utter_ask_surname_other_insured_party
@@ -73,32 +87,38 @@
 
 ## Saßen Sie selbst am Steuer?
 > driver
+- utter_ask_insured_party_driver
 * is_insured_party_driver{"insured_party_is_driver":"true"}
 > finish_questioning
 
 ## Saßen Sie selbst am Steuer?
 > driver
-* is_insured_party_driver{"insured_party_is_driver":"true"}
+- utter_ask_insured_party_driver
+* is_insured_party_driver{"insured_party_is_driver":"false"}
   - utter_ask_form_of_address_of_driver
+* set_form_of_address_of_driver{"form_of_address_of_driver":"herr"}
   - utter_ask_first_name_of_driver
+* set_first_name_of_driver{"first_name_of_driver":"maxi"}
   - utter_ask_surname_of_driver
+* set_surname_of_driver{"surname_of_driver":"mustermanni"}
   - utter_ask_birth_date_of_driver
+* set_birth_date_of_driver{"birth_date_of_driver":"01.01.1990}
 > finish_questioning
 
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 - utter_ask_own_car_damaged
-* is_car_damaged{"car_is_damaged":"falsch"} OR is_car_damaged{"car_is_damaged":"unbeschädigt"} OR is_car_damaged{"car_is_damaged":"nein"}
-  - action_is_car_damaged
+* is_car_damaged{"car_is_damaged":"false"} OR is_car_damaged{"car_is_damaged":"unbeschädigt"} OR is_car_damaged{"car_is_damaged":"nein"}
   - utter_ask_damage_caused_by_own_car
-* is_damage_caused_by_own_car{"damage_from_own_car":"falsch"} OR is_damage_caused_by_own_car{"damage_from_own_car":"nein"} OR is_damage_caused_by_own_car{"damage_from_own_car":"nicht verursacht"}
+* is_damage_caused_by_own_car{"damage_from_own_car":"false"}
 > catastrophe
 
 ## Hat ein naturereignis es beschädigt?
 > catastrophe
-<!-- TODO -->
-- utter_ask_license_plate
-* set_license_plate{"license_plate":"XXXX1234"} <!-- Regex nötig -->
+- utter_ask_natural_phenomenon
+* set_natural_phenomenon{"natural_phenomenon":"true"}
+  - utter_ask_license_plate
+* set_license_plate{"license_plate":"XXXX1234"}
   - utter_ask_date_of_damage
 * set_date_of_damage{"date_of_damage":"12.12.2012"} <!-- Duckling nötig -->
   - utter_ask_cause_of_damage
@@ -108,14 +128,18 @@
   - utter_ask_description_of_accident
 * set_description_of_accident{"description_of_accident":"auto ist in anderes auto und peng"} <!-- Regex nötig -->
   - utter_ask_current_location_of_car
-* set_current_location_of_car{"current_location_of_car":"musterstrasse"} <!-- Regex nötig -->
-<!-- Bitte Schildern Sie uns die Sichtbaren Schäden am Fahrzeug. -->
-<!-- Gab es schon vorher sichtbare Schäden? Wenn ja welche? -->
+* set_current_location_of_car{"current_location_of_car":"musterstrasse"}
+  - utter_ask_visible_damage_after
+* set_visible_damage_after{"visible_damage_after":"Baum auf dem Auto."}
+  - utter_ask_visible_damage_before
+* set_visible_damage_before{"visible_damage_before":"Kratzer auf der Motorhaube."}
 > finish_questioning
 
 ## Hat ein naturereignis es beschädigt?
 > catastrophe
-<!-- TODO -->
+- utter_ask_natural_phenomenon
+* set_natural_phenomenon{"natural_phenomenon":"true"}
+- utter_abbruch
 
 ## Haftpflicht Versicherungsnehmer Kontaktdaten
 > ask_liability_insurant_contact_details
@@ -143,16 +167,20 @@
 * set_current_location_of_car{"current_location_of_car":"musterstrasse"}
 > finish_questioning
 
-## Abschließende Fragen, die nach jeder Sparte folgen, falls callback true
-> finish_questioning
-- utter_ask_is_callback_wanted
-* set_is_callback_wanted{"is_callback_wanted":"ja"} OR set_is_callback_wanted{"is_callback_wanted":"gerne"}
-  - action_set_callback
-  - slot{"is_callback_wanted":"true"}
-
 ## Abschließende Fragen, die nach jeder Sparte folgen, falls callback false
 > finish_questioning
 - utter_ask_is_callback_wanted
+* set_is_callback_wanted{"is_callback_wanted":"ja"} OR set_is_callback_wanted{"is_callback_wanted":"gerne"}
+  - utter_ask_callback_phone_number
+* set_callback_phone_number{"callback_phone_number":"2345678"}
+  - utter_ask_rechability
+* set_date_and_time_reachability{"reachability_date":"18.09.2018", "reachability_time":"18:00"}
+  - utter_goodbye
+  - action_send_email
+
+## Abschließende Fragen, die nach jeder Sparte folgen
+> finish_questioning
+- utter_ask_is_callback_wanted
 * set_is_callback_wanted{"is_callback_wanted":"nein"} OR set_is_callback_wanted{"is_callback_wanted":"ungerne"}
-  - action_set_callback
-  - slot{"is_callback_wanted":"false"}
+- utter_goodbye
+- action_send_email

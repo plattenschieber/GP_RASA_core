@@ -68,11 +68,10 @@ def start_online_training(dialogue_model_path, endpoints):
         domain_file="models/dialogue/domain.yml",
         stories_file="stories",
         output_path=dialogue_model_path,
-        endpoints=endpoints,
+        endpoints=train.AvailableEndpoints.read_endpoints(endpoints),
         max_history=3,
         kwargs=learn_parameter)
-    online.serve_application(agent, serve_forever=True)
-
+    online.run_online_learning(agent=agent)
 
 if __name__ == '__main__':
     logger.setLevel(logging.DEBUG if "ENABLE_DEBUG" in os.environ else logging.INFO)
