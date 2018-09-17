@@ -14,4 +14,4 @@ services:
     networks:
       - chatbot
   networks:
-    - chatbot
+    chatbot:
