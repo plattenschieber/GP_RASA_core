@@ -2,7 +2,7 @@ version: '3'
 
 services:
   chatbot-core:
-    image: docker.nexus.gpchatbot.archi-lab.io/chatbot/core:$${bamboo.inject.commit-hash}
+    image: docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest
     environment:
       - SOCKET_PORT=5005
       - ENDPOINTS_CONFIG_FILE=config/endpoints.prod.yaml
