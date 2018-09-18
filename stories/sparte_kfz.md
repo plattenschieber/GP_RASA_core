@@ -22,7 +22,8 @@
 ## Story, business affair ist true
 > follow_business_affair
 - utter_ask_business_affair
-* is_business_affair{"business_affair":"true"} OR is_business_affair{"business_affair":"richtig"} OR is_business_affair{"business_affair":"korrekt"} OR is_business_affair{"business_affair":"genau"}
+* confirm
+  - slot{"business_affair": "true"}
   - utter_ask_branch_selected
 * branch_selected{"branch": "kfz"}
 > follow_kfz_decision_tree
@@ -30,7 +31,8 @@
 ## Story, business affair ist false
 > follow_business_affair
 - utter_ask_business_affair
-* is_business_affair{"business_affair":"false"} OR is_business_affair{"business_affair":"falsch"}
+* deny
+  - slot{"business_affair": "false"}
   - utter_ask_branch_selected
 * branch_selected{"branch": "kfz"}
 > follow_kfz_decision_tree
@@ -38,17 +40,21 @@
 ## Story, eigenes Auto beschädigt, Unfallgegner ist bei Zurich versichert und wird keine Rückrufnummer vereinbart
 > follow_kfz_decision_tree
 - utter_ask_own_car_damaged
-* is_car_damaged{"car_is_damaged":"true"} OR is_car_damaged{"car_is_damaged":"beschädigt"} OR is_car_damaged{"car_is_damaged":"ja"}
+* confirm
+  - slot{"car_is_damaged":"true"}
   - utter_ask_counterpart_insured_at_zurich
-* is_counterpart_insured_at_zurich{"counterpart_is_insured":"true"}
+* confirm
+  - slot{"counterpart_is_insured":"true"}
 > ask_liability_insurant_contact_details
 
 ## Story, eigenes Auto beschädigt, Unfallgegner ist nicht bei Zurich versichert
 > follow_kfz_decision_tree
 - utter_ask_own_car_damaged
-* is_car_damaged{"car_is_damaged":"false"}
+* deny
+  - slot{"car_is_damaged":"false"}
   - utter_ask_counterpart_insured_at_zurich
-* is_counterpart_insured_at_zurich{"counterpart_is_insured":"false"}
+* deny
+  - slot{"counterpart_is_insured":"false"}
   - utter_abbruch
 
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
@@ -170,7 +176,8 @@
 ## Abschließende Fragen, die nach jeder Sparte folgen, falls callback false
 > finish_questioning
 - utter_ask_is_callback_wanted
-* set_is_callback_wanted{"is_callback_wanted":"ja"} OR set_is_callback_wanted{"is_callback_wanted":"gerne"}
+* confirm
+  - slot{"is_callback_wanted":"true"}
   - utter_ask_callback_phone_number
 * set_callback_phone_number{"callback_phone_number":"2345678"}
   - utter_ask_rechability
@@ -181,6 +188,7 @@
 ## Abschließende Fragen, die nach jeder Sparte folgen
 > finish_questioning
 - utter_ask_is_callback_wanted
-* set_is_callback_wanted{"is_callback_wanted":"nein"} OR set_is_callback_wanted{"is_callback_wanted":"ungerne"}
-- utter_goodbye
-- action_send_email
+* deny
+  - slot{"is_callback_wanted":"false"} 
+  - utter_goodbye
+  - action_send_email
