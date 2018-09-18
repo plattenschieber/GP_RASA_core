@@ -7,8 +7,3 @@ services:
       - ENDPOINTS_CONFIG_FILE=config/endpoints.local.yaml
     ports:
       - "5005:5005"
-    networks:
-      - chatbot
-networks:
-  chatbot:
-    external: true

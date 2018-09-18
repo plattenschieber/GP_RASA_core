@@ -26,9 +26,19 @@ Um das Image zu bauen, muss der folgende Befehl ausgeführt werden:
 docker build -t docker.nexus.gpchatbot.archi-lab.io/chatbot/core .
 ```
 
-Um den Container lokal zu starten, muss der folgende Befehl ausgeführt werden:
+Um den Service lokal zu starten, muss der folgende Befehl ausgeführt werden:
 ```bash
-docker-compose -p gpb -f docker/docker-compose.yaml -f docker/docker-compose.local.yaml up
+docker-compose -p gpb -f docker/docker-compose.yaml -f docker/docker-compose.local.yaml up -d
+```
+
+Die Compose-Files erwarten ein Docker-Netzwerk, dass einmalig erstellt werden muss:
+```bash
+docker network create chatbot
+```
+
+Zum Stoppen muss dieser Befehl ausgeführt werden:
+```bash
+docker-compose -p gpb -f docker/docker-compose.yaml -f docker/docker-compose.local.yaml down
 ```
 
 In der `docker-compose.local.yaml` kann der Port des Servers und in der `endpoints.local.yaml` können die Endpoints angepasst werden.
@@ -38,19 +48,21 @@ Zum Trainieren eines Modells wird folgender Befehl ausgeführt:
 ```bash
 python src/train_dialog.py
 ```
-Zum starten des Servers muss der folgende Befehl ausgeführt werden.
+
+Zum starten des Servers muss der folgende Befehl ausgeführt werden:
 ```bash
 python src/start_core.py
 ```
-Alternativ kann für beides auch
+Alternativ kann für beides auch folgender Befehl ausgeführt werden:
 ```bash
 sh start-server.sh
 ```
-Ausgeführt werden.
+
 Aufrufen des Servers erfolgt wie folgt und sollte "OK" zurückliefern:
 ```
 GET http://localhost:5005/webhooks/rest/
 ```
+
 Aufrufen des Servers erfolgt wie folgt:
 ```
 POST localhost:5005/webhooks/rest/webhook
