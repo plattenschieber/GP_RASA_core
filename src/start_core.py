@@ -10,8 +10,7 @@ from rasa_core.interpreter import RasaNLUHttpInterpreter
 from rasa_core.training import online
 
 logging.basicConfig()
-logger = logging.getLogger('logger')
-
+logger = logging.getLogger()
 
 def read_endpoints(endpoint_file):
     AvailableEndpoints = namedtuple('AvailableEndpoints', 'nlg '
