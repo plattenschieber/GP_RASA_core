@@ -23,8 +23,8 @@
 > follow_business_affair
 - utter_ask_business_affair
 * confirm
-  - slot{"business_affair": "true"}
-  - utter_ask_branch_selected
+ - slot{"business_affair": "true"}
+ - utter_ask_branch_selected
 * branch_selected{"branch": "kfz"}
 > follow_kfz_decision_tree
 

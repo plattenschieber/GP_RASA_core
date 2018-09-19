@@ -69,7 +69,7 @@ if __name__ == '__main__':
     logger.setLevel(logging.DEBUG if "ENABLE_DEBUG" in os.environ else logging.INFO)
     dialogue_model_path = os.environ['DIALOGUE_MODEL_DIR'] if "DIALOGUE_MODEL_DIR" in os.environ else "models/dialogue"
     endpoints = os.environ['ENDPOINTS_CONFIG_FILE'] if "DIALOGUE_MODEL_DIR" in os.environ else "config/endpoints.yaml"
-    logger.log(logging.INFO, os.environ)
+
     if "ONLINE_TRAINING" in os.environ:
         logger.log(logging.INFO, "Started online trainer");
         start_online_training(dialogue_model_path, endpoints)

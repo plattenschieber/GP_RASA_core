@@ -90,6 +90,8 @@ actions:
  - action_set_business_affair
  - action_set_callback
  - action_is_car_damaged
+ - action_ask_kontakt
+ - utter_business_affair_confirm
 
 entities:
  - form_of_address
@@ -134,6 +136,9 @@ entities:
 
 
 slots:
+  requested_slot:
+    type: unfeaturized
+
   form_of_address:
     type: text
   first_name:
@@ -306,3 +311,5 @@ templates:
    - text: "Vielen Dank für Ihre Mitarbeit. Es wird eine E-Mail mit allen erfassten Informationen an einen Zuständigen Mitarbeiter gesendet. Ich wünsche Ihnen noch einen schönen Tag."
  utter_abbruch:
    - text: "Es tut mir leid, aber in diesem Fall kann ich Ihnen nicht weiter helfen. Sollten sie weiterhin Hilfe brauchen rufen Sie bitte die Service Hotline an: Tel.: ServiceHotlineEinfügen"
+ utter_business_affair_confirm:
+   - text: "Business_affair: {business_affair}"
