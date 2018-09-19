@@ -52,7 +52,14 @@ def start_server(dialogue_model_path, endpoints):
     ]
 
     agent.handle_channels(channels, socket_port)
+# Overwrite due to cors
+def run_online_learning(agent, finetune=False, serve_forever=True):
+    # type: (Agent, bool, bool) -> WSGIServer
+    """Start the online learning with the model of the agent."""
 
+    app = online.server.create_app(agent, cors_origins='*')
+
+    return online._serve_application(app, finetune, serve_forever)
 
 def start_online_training(dialogue_model_path, endpoints):
     server_endpoints = read_endpoints(endpoints)
@@ -62,8 +69,7 @@ def start_online_training(dialogue_model_path, endpoints):
                        interpreter=rasaNLU,
                        action_endpoint=server_endpoints.action)
 
-    online.run_online_learning(agent=agent)
-
+    run_online_learning(agent=agent)
 
 if __name__ == '__main__':
     logger.setLevel(logging.DEBUG if "ENABLE_DEBUG" in os.environ else logging.INFO)
