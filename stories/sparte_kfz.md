@@ -62,7 +62,7 @@
 - utter_ask_own_car_damaged
 * is_car_damaged{"car_is_damaged":"false"} OR is_car_damaged{"car_is_damaged":"unbeschädigt"} OR is_car_damaged{"car_is_damaged":"nein"}
   - utter_ask_damage_caused_by_own_car
-* is_damage_caused_by_own_car{"damage_from_own_car":"true"}<!-- False Fall? --!>
+* is_damage_caused_by_own_car{"damage_from_own_car":"true"}<!-- False Fall? -->
   - utter_ask_license_plate
 * set_license_plate{"license_plate":"XXXX1234"}
   - utter_ask_date_of_damage
@@ -108,7 +108,7 @@
   - utter_ask_surname_of_driver
 * set_surname_of_driver{"surname_of_driver":"mustermanni"}
   - utter_ask_birth_date_of_driver
-* set_birth_date_of_driver{"birth_date_of_driver":"01.01.1990}
+* set_birth_date_of_driver{"birth_date_of_driver":"01.01.1990"}
 > finish_questioning
 
 ## Story, eigenes Auto nicht beschädigt, Schaden stammt vom eigenem Auto, man war selsbt am Steuer und wird keine Rückrufnummer vereinbart
