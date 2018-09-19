@@ -5,4 +5,4 @@ WORKDIR /chatbot
 
 EXPOSE 5005
 
-ENTRYPOINT exec sh start-server.sh
+ENTRYPOINT ["./start-server.sh"]
