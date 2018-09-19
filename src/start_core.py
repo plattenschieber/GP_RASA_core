@@ -33,7 +33,7 @@ def read_endpoints(endpoint_file):
 def start_server(dialogue_model_path, endpoints):
     socket_port = int(os.environ['SOCKET_PORT']) if "SOCKET_PORT" in os.environ else 5005
     server_endpoints = read_endpoints(endpoints)
-    rasaNLU = RasaNLUHttpInterpreter(project_name="default", endpoint=server_endpoints.nlu)
+    rasaNLU = RasaNLUHttpInterpreter(project_name="damage_report_1.0.0", endpoint=server_endpoints.nlu)
 
     agent = Agent.load(dialogue_model_path,
                        interpreter=rasaNLU,

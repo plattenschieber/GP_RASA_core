@@ -1,4 +1,4 @@
-package com.my.company;
+package io.archi-lab.chatbot;
 
 import com.atlassian.bamboo.specs.api.builders.plan.Plan;
 import com.atlassian.bamboo.specs.api.exceptions.PropertiesValidationException;
