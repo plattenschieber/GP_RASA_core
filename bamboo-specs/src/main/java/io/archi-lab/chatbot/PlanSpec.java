@@ -54,23 +54,23 @@ public class PlanSpec {
                                                                                                 .scope(InjectVariablesScope.RESULT),
                                                                                 new DockerBuildImageTask()
                                                                                                 .description("Build the Docker image")
-                                                                                                .imageName("docker.nexus.gpchatbot.archi-lab.io/chatbot/webchat")
+                                                                                                .imageName("docker.nexus.gpchatbot.archi-lab.io/chatbot/core")
                                                                                                 .useCache(true)
                                                                                                 .dockerfileInWorkingDir(),
                                                                                 new ScriptTask().description(
                                                                                                 "Tag the Docker image with commit hash")
-                                                                                                .inlineBody("docker tag docker.nexus.gpchatbot.archi-lab.io/chatbot/webchat docker.nexus.gpchatbot.archi-lab.io/chatbot/webchat:${bamboo.inject.commit-hash}"),
+                                                                                                .inlineBody("docker tag docker.nexus.gpchatbot.archi-lab.io/chatbot/core docker.nexus.gpchatbot.archi-lab.io/chatbot/core:${bamboo.inject.commit-hash}"),
                                                                                 new DockerPushImageTask()
                                                                                                 .customRegistryImage(
-                                                                                                                "docker.nexus.gpchatbot.archi-lab.io/chatbot/webchat")
+                                                                                                                "docker.nexus.gpchatbot.archi-lab.io/chatbot/core")
                                                                                                 .defaultAuthentication(),
                                                                                 new DockerPushImageTask()
                                                                                                 .customRegistryImage(
-                                                                                                                "docker.nexus.gpchatbot.archi-lab.io/chatbot/webchat:${bamboo.inject.commit-hash}")
+                                                                                                                "docker.nexus.gpchatbot.archi-lab.io/chatbot/core:${bamboo.inject.commit-hash}")
                                                                                                 .defaultAuthentication(),
                                                                                 new ScriptTask().description(
                                                                                                 "Remove old images from Nexus Docker repository")
-                                                                                                .inlineBody("echo \"# Nexus Credentials\\nnexus_host = \\\"https://nexus.gpchatbot.archi-lab.io\\\"\\nnexus_username = \\\"bamboo\\\"\\nnexus_password = \\\"gpchatbot\\\"\\nnexus_repository = \\\"docker-hosted\\\"\" > .credentials\nnexus-cli image delete -name chatbot/webchat -keep 21"))
+                                                                                                .inlineBody("echo \"# Nexus Credentials\\nnexus_host = \\\"https://nexus.gpchatbot.archi-lab.io\\\"\\nnexus_username = \\\"bamboo\\\"\\nnexus_password = \\\"gpchatbot\\\"\\nnexus_repository = \\\"docker-hosted\\\"\" > .credentials\nnexus-cli image delete -name chatbot/core -keep 21"))
                                                                                 .requirements(new Requirement(
                                                                                                 "system.builder.command.nexus-cli"))))
                                                 .linkedRepositories("chatbot-core (master)")
