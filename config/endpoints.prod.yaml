@@ -4,3 +4,6 @@ action_endpoint:
 
 nlu:
   url: http://chatbot-nlu:5000
+
+model:
+  url: http://localhost:8000/models

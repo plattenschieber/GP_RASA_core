@@ -49,14 +49,14 @@ actions:
  - utter_ask_first_name
  - utter_ask_surname
  - utter_ask_street_address
- - utter_ask_zip_code
- - utter_ask_city
+ - utter_ask_address_zip_code
+ - utter_ask_address_city
  - utter_ask_phone_number
  - utter_ask_e_mail
  - utter_ask_business_affair
- - utter_ask_branch_selected
- - utter_ask_own_car_damaged
- - utter_ask_counterpart_insured_at_zurich
+ - utter_ask_branch
+ - utter_ask_car_is_damaged
+ - utter_ask_counterpart_is_insured
  - utter_ask_damage_caused_by_own_car
  - utter_ask_first_name_other_insured_party
  - utter_ask_surname_other_insured_party
@@ -79,7 +79,7 @@ actions:
  - utter_ask_first_name_of_driver
  - utter_ask_surname_of_driver
  - utter_ask_birth_date_of_driver
- - utter_ask_rechability
+ - utter_ask_rechability_date
  - utter_ask_natural_phenomenon
  - utter_ask_visible_damage_after
  - utter_ask_visible_damage_before
@@ -87,18 +87,25 @@ actions:
  - utter_goodbye
  - utter_abbruch
  - action_send_email
- - action_set_business_affair
  - action_set_callback
- - action_is_car_damaged
- - action_ask_kontakt
- - utter_business_affair_confirm
+ - action_ask_contact_details
+ - action_ask_branch
+ - action_ask_car_is_damaged
+ - action_ask_counterpart_insured_at_zurich
+ - action_ask_liability_contact_data
+ - action_ask_kfz
+ - action_ask_is_callback_wanted
+ - action_ask_is_damage_caused_by_own_car
+ - action_ask_kfz_other_party
+ - action_ask_insured_party_driver
+ - action_ask_callback_information
+ - action_ask_insured_party_driver_informations
 
 entities:
  - form_of_address
  - first_name
  - surname
- - address_street
- - address_street_number
+ - street_address
  - address_zip_code
  - address_city
  - phone_number
@@ -125,7 +132,6 @@ entities:
  - is_callback_wanted
  - callback_phone_number
  - reachability_date
- - reachability_time
  - form_of_address_of_driver
  - first_name_of_driver
  - surname_of_driver
@@ -145,9 +151,7 @@ slots:
     type: text
   surname:
     type: text
-  address_street:
-    type: text
-  address_street_number:
+  street_address:
     type: text
   address_zip_code:
     type: text
@@ -237,9 +241,9 @@ templates:
    - text: "Dankeschön. Wie lautet Ihr Nachname?"
  utter_ask_street_address:
    - text: "Wie lautet Ihre Straße und Hausnummer?"
- utter_ask_zip_code:
+ utter_ask_address_zip_code:
    - text: "Nennen Sie mir bitte Ihre Postleitzahl."
- utter_ask_city:
+ utter_ask_address_city:
    - text: "In welchem Ort wohnen Sie?"
  utter_ask_phone_number:
    - text: "Unter welcher Telefonnummer können wir Sie am besten erreichen?"
@@ -247,11 +251,11 @@ templates:
    - text: "Wie lautet Ihre E-Mail Adresse?"
  utter_ask_business_affair:
    - text: "Handelt es sich bei diesem Fall um eine gewerbliche Angelegenheit?"
- utter_ask_branch_selected:
+ utter_ask_branch:
    - text: "In welcher Sparte möchten Sie einen Versicherungsfall melden?"
- utter_ask_own_car_damaged:
+ utter_ask_car_is_damaged:
    - text: "Wurde Ihr eigenes Auto beschädigt?"
- utter_ask_counterpart_insured_at_zurich:
+ utter_ask_counterpart_is_insured:
    - text: "Ist Ihr Unfallgegner bei der Zurich versichert?"
  utter_ask_damage_caused_by_own_car:
    - text: "Wurde der Schaden von Ihrem Auto verursacht?"
@@ -297,7 +301,7 @@ templates:
    - text: "Wie lautet der Nachname des Fahrers?"
  utter_ask_birth_date_of_driver:
    - text: "Was ist das Geburtsdatum des Fahrers?"
- utter_ask_rechability:
+ utter_ask_rechability_date:
    - text: "Ab wann sind Sie erreichbar? Wählen Sie bitte ein Datum und eine Uhrzeit aus. In den darauf folgenden zwei Stunden werden wir Sie anrufen."
  utter_ask_natural_phenomenon:
    - text: "Hat ein Naturereignis Ihr Auto beschädigt?"
@@ -311,5 +315,3 @@ templates:
    - text: "Vielen Dank für Ihre Mitarbeit. Es wird eine E-Mail mit allen erfassten Informationen an einen Zuständigen Mitarbeiter gesendet. Ich wünsche Ihnen noch einen schönen Tag."
  utter_abbruch:
    - text: "Es tut mir leid, aber in diesem Fall kann ich Ihnen nicht weiter helfen. Sollten sie weiterhin Hilfe brauchen rufen Sie bitte die Service Hotline an: Tel.: ServiceHotlineEinfügen"
- utter_business_affair_confirm:
-   - text: "Business_affair: {business_affair}"

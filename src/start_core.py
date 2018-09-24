@@ -2,7 +2,7 @@ import logging
 import os
 from collections import namedtuple
 from rasa_core import utils
-from rasa_core.agent import Agent
+from rasa_core.agent import Agent, load_from_server
 from rasa_core.channels.channel import RestInput
 from rasa_core.channels.socketio import SocketIOInput
 from rasa_core.interpreter import RasaNLUHttpInterpreter
@@ -32,13 +32,18 @@ def read_endpoints(endpoint_file):
 
 def start_server(dialogue_model_path, endpoints):
     socket_port = int(os.environ['SOCKET_PORT']) if "SOCKET_PORT" in os.environ else 5005
+    logger.setLevel(logging.DEBUG)
     server_endpoints = read_endpoints(endpoints)
     rasaNLU = RasaNLUHttpInterpreter(project_name="damage_report_1.0.0", endpoint=server_endpoints.nlu)
 
     agent = Agent.load(dialogue_model_path,
                        interpreter=rasaNLU,
                        action_endpoint=server_endpoints.action)
-
+    # Code to load the model from a server
+    #agent = load_from_server(interpreter=rasaNLU,
+    #                         action_endpoint=server_endpoints.action,
+    #                        model_server=server_endpoints.model,
+    #                         wait_time_between_pulls=100)
     channels = [
         SocketIOInput(
             # event name for messages sent from the user
