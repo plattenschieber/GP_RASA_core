@@ -33,11 +33,23 @@ public class PlanSpec {
             .pluginConfigurations(new ConcurrentBuilds()
                     .useSystemWideDefault(false))
             .stages(new Stage("Default Stage")
-                    .jobs(new Job("Defaullllt Job",
+                    .jobs(new Job("Default Job",
                             new BambooKey("JOB1"))
                             .tasks(new VcsCheckoutTask()
                                     .description("Checkout Default Repository")
-                                    .checkoutItems(new CheckoutItem().defaultRepository()))))
+                                    .checkoutItems(new CheckoutItem().defaultRepository()),
+                                    new ScriptTask()
+                                            .description("Print docker-compose")
+                                            .enabled(false)
+                                            .inlineBody("less ./docker/docker-compose.yaml"),
+                                    new DockerBuildImageTask()
+                                            .description("Build the Docker image")
+                                            .imageName("docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest")
+                                            .useCache(true)
+                                            .dockerfileInWorkingDir(),
+                                    new DockerPushImageTask()
+                                            .customRegistryImage("docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest")
+                                            .defaultAuthentication())))
             .linkedRepositories("chatbot-core (master)")
 
             .triggers(new BitbucketServerTrigger())
