@@ -94,7 +94,7 @@ public class PlanSpec {
   public PlanPermissions planPermission() {
     final PlanPermissions planPermission = new PlanPermissions(new PlanIdentifier(
         "CHAT", "CORE")).permissions(new Permissions()
-        .userPermissions("jlengelsen", PermissionType.EDIT,
+        .userPermissions("bamboo", PermissionType.EDIT,
             PermissionType.VIEW,
             PermissionType.ADMIN,
             PermissionType.CLONE,
