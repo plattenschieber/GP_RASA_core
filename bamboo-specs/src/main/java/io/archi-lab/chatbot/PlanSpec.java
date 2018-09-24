@@ -1,4 +1,4 @@
-package io.archi-lab.chatbot;
+package io.archi_lab.chatbot;
 
 import com.atlassian.bamboo.specs.api.BambooSpec;
 import com.atlassian.bamboo.specs.api.builders.BambooKey;
