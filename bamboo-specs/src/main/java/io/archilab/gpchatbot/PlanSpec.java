@@ -30,11 +30,13 @@ import com.atlassian.bamboo.specs.util.BambooServer;
 public class PlanSpec {
 
   public Plan plan() {
-    final Plan plan = new Plan(
-        new Project().oid(new BambooOid("ky5ricqu8qv5"))
-            .key(new BambooKey("CHAT")).name("Chatbot"),
-        "core", new BambooKey("CORE"))
-        .oid(new BambooOid("kxw2ardmf1mq"))
+    final Plan plan = new Plan(new Project()
+            .oid(new BambooOid("ky5ricqu8qv5"))
+            .key(new BambooKey("CHAT"))
+            .name("Chatbot"),
+        "core",
+        new BambooKey("CORE"))
+        .oid(new BambooOid("kxw2ardmf1mu"))
         .pluginConfigurations(new ConcurrentBuilds()
             .useSystemWideDefault(false))
         .stages(new Stage("Default Stage").jobs(new Job(
