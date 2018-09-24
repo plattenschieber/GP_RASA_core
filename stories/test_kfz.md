@@ -35,6 +35,7 @@
   - action_ask_contact_details
   - slot{"e_mail":"max@mustermann.de"}
   - slot{"requested_slot":"business_affair"}
+  - action_send_email
 > follow_business_affair
 
 ## Story, business affair ist true
@@ -113,6 +114,10 @@
   - slot{"license_plate":"XXXX1234"}
   - slot{"requested_slot":"date_of_damage"}
 * set_date_of_damage{"date_of_damage":"12.12.2012"}
+  - action_ask_kfz
+  - slot{"date_of_damage":"12.12.2012"}
+  - slot{"requested_slot":"cause_of_damage"}
+* set_time_of_damage{"time_of_damage":"11:00"}
   - action_ask_kfz
   - slot{"date_of_damage":"12.12.2012"}
   - slot{"requested_slot":"cause_of_damage"}
