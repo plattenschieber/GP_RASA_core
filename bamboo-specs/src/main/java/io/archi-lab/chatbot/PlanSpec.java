@@ -10,7 +10,6 @@ import com.atlassian.bamboo.specs.api.builders.plan.Job;
 import com.atlassian.bamboo.specs.api.builders.plan.Plan;
 import com.atlassian.bamboo.specs.api.builders.plan.PlanIdentifier;
 import com.atlassian.bamboo.specs.api.builders.plan.Stage;
-import com.atlassian.bamboo.specs.api.builders.plan.artifact.Artifact;
 import com.atlassian.bamboo.specs.api.builders.plan.branches.BranchCleanup;
 import com.atlassian.bamboo.specs.api.builders.plan.branches.PlanBranchManagement;
 import com.atlassian.bamboo.specs.api.builders.plan.configuration.ConcurrentBuilds;
@@ -26,61 +25,118 @@ import com.atlassian.bamboo.specs.util.BambooServer;
 @BambooSpec
 public class PlanSpec {
 
-    public Plan plan() {
-        final Plan plan = new Plan(new Project()
-                .oid(new BambooOid("ky5ricqu8qv5"))
-                .key(new BambooKey("CHAT"))
-                .name("Chatbot"),
-            "core",
-            new BambooKey("CORE"))
-            .oid(new BambooOid("kxw2ardmf1mq"))
-            .pluginConfigurations(new ConcurrentBuilds()
-                    .useSystemWideDefault(false))
-            .stages(new Stage("Default Stage")
-                    .jobs(new Job("Default Job",
-                            new BambooKey("JOB1"))
-                            .tasks(new VcsCheckoutTask()
-                                    .description("Checkout Default Repository")
-                                    .checkoutItems(new CheckoutItem().defaultRepository()),
-                                    new ScriptTask()
-                                            .description("Print docker-compose")
-                                            .enabled(false)
-                                            .inlineBody("less ./docker/docker-compose.yaml"),
-                                    new DockerBuildImageTask()
-                                            .description("Build the Docker image")
-                                            .imageName("docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest")
-                                            .useCache(true)
-                                            .dockerfileInWorkingDir(),
-                                    new DockerPushImageTask()
-                                            .customRegistryImage("docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest")
-                                            .defaultAuthentication())))
-            .linkedRepositories("chatbot-core (master)")
+  public Plan plan() {
+    final Plan plan = new Plan(new Project()
+        .oid(new BambooOid("ky5ricqu8qv5"))
+        .key(new BambooKey("CHAT"))
+        .name("Chatbot"),
+        "core",
+        new BambooKey("CORE"))
+        .oid(new BambooOid("kxw2ardmf1mq"))
+        .pluginConfigurations(new ConcurrentBuilds()
+            .useSystemWideDefault(false))
+        .stages(new Stage("Default Stage")
+            .jobs(new Job("Default Job",
+                new BambooKey("JOB1"))
+                .tasks(new VcsCheckoutTask()
+                        .description("Checkout Default Repository")
+                        .checkoutItems(new CheckoutItem().defaultRepository()),
+                    new ScriptTask()
+                        .description("Print docker-compose")
+                        .enabled(false)
+                        .inlineBody("less ./docker/docker-compose.yaml"),
+                    new DockerBuildImageTask()
+                        .description("Build the Docker image")
+                        .imageName("docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest")
+                        .useCache(true)
+                        .dockerfileInWorkingDir(),
+                    new DockerPushImageTask()
+                        .customRegistryImage(
+                            "docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest")
+                        .defaultAuthentication())))
+        .linkedRepositories("chatbot-core (master)")
 
-            .triggers(new BitbucketServerTrigger())
-            .planBranchManagement(new PlanBranchManagement()
-                    .delete(new BranchCleanup())
-                    .notificationForCommitters());
-        return plan;
-    }
+        .triggers(new BitbucketServerTrigger())
+        .planBranchManagement(new PlanBranchManagement()
+            .delete(new BranchCleanup())
+            .notificationForCommitters());
+    return plan;
+  }
 
-    public PlanPermissions planPermission() {
-        final PlanPermissions planPermission = new PlanPermissions(new PlanIdentifier("CHAT", "CORE"))
-            .permissions(new Permissions()
-                    .userPermissions("jlengelsen", PermissionType.EDIT, PermissionType.VIEW, PermissionType.ADMIN, PermissionType.CLONE, PermissionType.BUILD)
-                    .loggedInUserPermissions(PermissionType.VIEW)
-                    .anonymousUserPermissionView());
-        return planPermission;
-    }
+  public PlanPermissions planPermission() {
+    final PlanPermissions planPermission = new PlanPermissions(new PlanIdentifier("CHAT", "CORE"))
+        .permissions(new Permissions()
+            .userPermissions("jlengelsen", PermissionType.EDIT, PermissionType.VIEW,
+                PermissionType.ADMIN, PermissionType.CLONE, PermissionType.BUILD)
+            .loggedInUserPermissions(PermissionType.VIEW)
+            .anonymousUserPermissionView());
+    return planPermission;
+  }
 
-    public static void main(String... argv) {
-        //By default credentials are read from the '.credentials' file.
-        BambooServer bambooServer = new BambooServer("https://bamboo.gpchatbot.archi-lab.io");
-        final PlanSpec planSpec = new PlanSpec();
+  public Deployment rootObject() {
+    final Deployment rootObject = new Deployment(new PlanIdentifier("CHAT", "CORE")
+        .oid(new BambooOid("kxw2ardmf1mq")),
+        "core-deployment")
+        .oid(new BambooOid("ky8ja8kbwphe"))
+        .releaseNaming(new ReleaseNaming("release-59")
+            .autoIncrement(true))
+        .environments(new Environment("Production")
+            .tasks(new CleanWorkingDirectoryTask(),
+                new ArtifactDownloaderTask()
+                    .description("Download release contents")
+                    .artifacts(new DownloadItem()
+                        .allArtifacts(true)
+                        .path("./artifacts")),
+                new ScriptTask()
+                    .description("Deploy Docker stack via docker-machine")
+                    .inlineBody(
+                        "eval $(docker-machine env gpchatbotprod)\ndocker stack deploy --with-registry-auth \\\n  -c ./artifacts/docker-compose.yaml \\\n  -c ./artifacts/docker-compose.prod.yaml \\\n  core"),
+                new ScriptTask()
+                    .description("Hello World")
+                    .inlineBody("echo \"Hello Worlddddd!\""))
+            .triggers(new AfterSuccessfulBuildPlanTrigger()));
+    return rootObject;
+  }
 
-        final Plan plan = planSpec.plan();
-        bambooServer.publish(plan);
+  public DeploymentPermissions deploymentPermission() {
+    final DeploymentPermissions deploymentPermission = new DeploymentPermissions("core-deployment")
+        .permissions(new Permissions()
+            .userPermissions("jlengelsen", PermissionType.EDIT, PermissionType.VIEW)
+            .loggedInUserPermissions(PermissionType.VIEW)
+            .anonymousUserPermissionView());
+    return deploymentPermission;
+  }
 
-        final PlanPermissions planPermission = planSpec.planPermission();
-        bambooServer.publish(planPermission);
-    }
+  public EnvironmentPermissions environmentPermission1() {
+    final EnvironmentPermissions environmentPermission1 = new EnvironmentPermissions(
+        "core-deployment")
+        .environmentName("Production")
+        .permissions(new Permissions()
+            .userPermissions("jlengelsen", PermissionType.EDIT, PermissionType.VIEW,
+                PermissionType.BUILD)
+            .loggedInUserPermissions(PermissionType.VIEW)
+            .anonymousUserPermissionView());
+    return environmentPermission1;
+  }
+
+  public static void main(String... argv) {
+    //By default credentials are read from the '.credentials' file.
+    BambooServer bambooServer = new BambooServer("https://bamboo.gpchatbot.archi-lab.io");
+    final PlanSpec planSpec = new PlanSpec();
+
+    final Plan plan = planSpec.plan();
+    bambooServer.publish(plan);
+
+    final PlanPermissions planPermission = planSpec.planPermission();
+    bambooServer.publish(planPermission);
+
+    final Deployment rootObject = planSpec.rootObject();
+    bambooServer.publish(rootObject);
+
+    final DeploymentPermissions deploymentPermission = planSpec.deploymentPermission();
+    bambooServer.publish(deploymentPermission);
+
+    final EnvironmentPermissions environmentPermission1 = planSpec.environmentPermission1();
+    bambooServer.publish(environmentPermission1);
+  }
 }
