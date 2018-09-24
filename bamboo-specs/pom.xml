@@ -10,7 +10,7 @@
   </parent>
 
   <groupId>io.archi-lab.chatbot</groupId>
-  <artifactId>bamboo-spec</artifactId>
+  <artifactId>bamboo-specs</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
