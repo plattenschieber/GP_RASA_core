@@ -25,7 +25,7 @@ def read_endpoints(endpoint_file):
     action = utils.read_endpoint_config(endpoint_file,
                                         endpoint_type="action_endpoint")
     model = utils.read_endpoint_config(endpoint_file,
-                                       endpoint_type="models")
+                                       endpoint_type="model")
 
     return AvailableEndpoints(nlg, nlu, action, model)
 

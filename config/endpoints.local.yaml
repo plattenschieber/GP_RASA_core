@@ -6,4 +6,4 @@ nlu:
   url: http://gpb_chatbot-nlu_1:5000
 
 model:
-  url: http://gpb_chatbot-model-server_1:8000/models
+  url: http://gpb_chatbot-model-server_1:8000/models/core
