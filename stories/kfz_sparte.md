@@ -35,6 +35,7 @@
   - action_ask_contact_details
   - slot{"e_mail":"max@mustermann.de"}
   - slot{"requested_slot":"business_affair"}
+  - action_send_email
 * confirm
   - action_ask_contact_details
   - slot{"business_affair":true}
