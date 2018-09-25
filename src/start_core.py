@@ -68,7 +68,7 @@ def run_online_learning(agent, finetune=False, serve_forever=True):
 
 def start_online_training(dialogue_model_path, endpoints):
     server_endpoints = read_endpoints(endpoints)
-    rasaNLU = RasaNLUHttpInterpreter(project_name="default", endpoint=server_endpoints.nlu)
+    rasaNLU = RasaNLUHttpInterpreter(project_name="damage_report_1.0.0", endpoint=server_endpoints.nlu)
 
     agent = Agent.load(dialogue_model_path,
                        interpreter=rasaNLU,
