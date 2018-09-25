@@ -115,7 +115,7 @@ public class PlanSpec {
     return planPermission;
   }
 
-  public Deployment rootObject() {
+  public Deployment deployment() {
     final Deployment rootObject = new Deployment(new PlanIdentifier("CHAT", "CORE")
         .oid(new BambooOid("kxw2ardmf1mu")),
         "core-deployment")
@@ -132,10 +132,7 @@ public class PlanSpec {
                 new ScriptTask()
                     .description("Deploy Docker stack via docker-machine")
                     .inlineBody(
-                        "eval $(docker-machine env gpchatbotprod)\ndocker stack deploy --with-registry-auth \\\n  -c ./artifacts/docker-compose.yaml \\\n  -c ./artifacts/docker-compose.prod.yaml \\\n  core"),
-                new ScriptTask()
-                    .description("Hello World")
-                    .inlineBody("echo \"Pipeline works!\""))
+                        "eval $(docker-machine env gpchatbotprod)\ndocker stack deploy --with-registry-auth \\\n  -c ./artifacts/docker-compose.yaml \\\n  -c ./artifacts/docker-compose.prod.yaml \\\n  core"))
             .triggers(new AfterSuccessfulBuildPlanTrigger()));
     return rootObject;
   }
@@ -173,7 +170,7 @@ public class PlanSpec {
     final PlanPermissions planPermission = planSpec.planPermission();
     bambooServer.publish(planPermission);
 
-    final Deployment rootObject = planSpec.rootObject();
+    final Deployment rootObject = planSpec.deployment();
     bambooServer.publish(rootObject);
 
     final DeploymentPermissions deploymentPermission = planSpec.deploymentPermission();
