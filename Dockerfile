@@ -5,4 +5,4 @@ WORKDIR /chatbot
 
 EXPOSE 5005
 
-ENTRYPOINT exec sh ./start-server.sh
+ENTRYPOINT exec python src/start_core.py

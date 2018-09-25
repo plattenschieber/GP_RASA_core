@@ -36,14 +36,14 @@ def start_server(dialogue_model_path, endpoints):
     server_endpoints = read_endpoints(endpoints)
     rasaNLU = RasaNLUHttpInterpreter(project_name="damage_report_1.0.0", endpoint=server_endpoints.nlu)
 
-    agent = Agent.load(dialogue_model_path,
-                       interpreter=rasaNLU,
-                       action_endpoint=server_endpoints.action)
+    #agent = Agent.load(dialogue_model_path,
+    #                   interpreter=rasaNLU,
+    #                   action_endpoint=server_endpoints.action)
     # Code to load the model from a server
-    #agent = load_from_server(interpreter=rasaNLU,
-    #                         action_endpoint=server_endpoints.action,
-    #                        model_server=server_endpoints.model,
-    #                         wait_time_between_pulls=100)
+    agent = load_from_server(interpreter=rasaNLU,
+                             action_endpoint=server_endpoints.action,
+                            model_server=server_endpoints.model,
+                             wait_time_between_pulls=60)
     channels = [
         SocketIOInput(
             # event name for messages sent from the user
