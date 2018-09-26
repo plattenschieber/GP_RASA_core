@@ -1,5 +1,6 @@
 import logging
-
+import shutil
+import requests
 from rasa_core.agent import Agent
 from rasa_core.policies.fallback import FallbackPolicy
 from rasa_core.policies.keras_policy import KerasPolicy
@@ -11,7 +12,6 @@ fallback = FallbackPolicy(fallback_action_name="action_default_fallback",
 
 
 def train_dialog(dialog_training_data_file, domain_file, path_to_model='./models/dialogue'):
-    logging.basicConfig(level='DEBUG')
     agent = Agent(domain_file,
                   policies=[MemoizationPolicy(max_history=2), KerasPolicy(), fallback])
     training_data = agent.load_data(dialog_training_data_file)
@@ -24,5 +24,9 @@ def train_dialog(dialog_training_data_file, domain_file, path_to_model='./models
     agent.persist(path_to_model)
 
 
-def send_to_model_server():
-    pass
+def send_to_model_server(path_to_model, url):
+    shutil.make_archive("/output/model", 'zip', path_to_model)
+    r = requests.post(url,
+                      data=open("/output/model.zip"),
+                      headers={'content-type': 'application/zip'}
+                      )
