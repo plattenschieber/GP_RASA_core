@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  chatbot-core:
+    image: docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest
+    environment:
+      - SOCKET_PORT=5005
+      - ENDPOINTS_CONFIG_FILE=config/endpoints.local.yaml
+      - MODE=online_trainer
+    ports:
+      - "5005:5005"
