@@ -25,14 +25,14 @@
 * set_city{"address_city":"musterhausen"} <!-- Regex nötig -->
   - action_ask_contact_details
   - slot{"address_city":"musterhausen"}
-  - slot{"requested_slot":"phone_number"}
-* set_phone_number{"phone_number":"123456"} <!-- Regex nötig -->
+  - slot{"requested_slot":"phone-number"}
+* set_phone_number{"phone-number":"123456"} <!-- Regex nötig -->
   - action_ask_contact_details
-  - slot{"phone_number":"123456"}
-  - slot{"requested_slot":"e_mail"}
-* set_e_mail{"e_mail":"max@mustermann.de"} <!-- Überprüfung nötig -->
+  - slot{"phone-number":"123456"}
+  - slot{"requested_slot":"email"}
+* set_email{"email":"max@mustermann.de"} <!-- Überprüfung nötig -->
   - action_ask_contact_details
-  - slot{"e_mail":"max@mustermann.de"}
+  - slot{"email":"max@mustermann.de"}
   - slot{"requested_slot":"business_affair"}
   - action_send_email
 * confirm

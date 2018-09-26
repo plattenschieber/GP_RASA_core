@@ -3,37 +3,36 @@
   - utter_greet
   - action_ask_contact_details
   - slot{"requested_slot" : "form_of_address"}
-* set_form_of_address{"form_of_address":"herr"}
+* set_form_of_address{"form_of_address":""}
   - action_ask_contact_details
   - slot{"form_of_address":"herr"}
   - slot{"requested_slot":"first_name"}
-* set_first_name{"first_name":"max"} <!-- Regex nötig -->
+* set_first_name{"first_name":""} <!-- Regex nötig -->
   - action_ask_contact_details
   - slot{"first_name":"max"}
   - slot{"requested_slot":"surname"}
-* set_surname{"surname":"mustermann"} <!-- Regex nötig -->
+* set_surname{"surname":""} <!-- Regex nötig -->
   - action_ask_contact_details
   - slot{"surname":"mustermann"}
   - slot{"requested_slot":"street_address"} 
-* set_street_address{"street_address":"musterstrasse 11"} <!-- Regex nötig -->
+* set_street_address{"street_address":""} <!-- Regex nötig -->
   - action_ask_contact_details
   - slot{"street_address":"musterstrasse 11"}
-  - slot{"requested_slot":"address_zip_code"}
-* set_zip_code{"address_zip_code":"12345"} <!-- Regex nötig -->
+  - slot{"requested_slot":"number"}
+* set_zip_code{"number":""} <!-- Regex nötig -->
   - action_ask_contact_details
-  - slot{"address_zip_code":"12345"}
   - slot{"requested_slot":"address_city"}
-* set_city{"address_city":"musterhausen"} <!-- Regex nötig -->
+* set_city{"address_city":""} <!-- Regex nötig -->
   - action_ask_contact_details
   - slot{"address_city":"musterhausen"}
-  - slot{"requested_slot":"phone_number"}
-* set_phone_number{"phone_number":"123456"} <!-- Regex nötig -->
+  - slot{"requested_slot":"phone-number"}
+* set_phone_number{"phone-number":""} <!-- Regex nötig -->
   - action_ask_contact_details
-  - slot{"phone_number":"123456"}
-  - slot{"requested_slot":"e_mail"}
-* set_e_mail{"e_mail":"max@mustermann.de"} <!-- Überprüfung nötig -->
+  - slot{"phone-number":"123456"}
+  - slot{"requested_slot":"email"}
+* set_email{"email":""} <!-- Überprüfung nötig -->
   - action_ask_contact_details
-  - slot{"e_mail":"max@mustermann.de"}
+  - slot{"email":"max@mustermann.de"}
   - slot{"requested_slot":"business_affair"}
   - action_send_email
 > follow_business_affair
@@ -92,16 +91,16 @@
   
 ## Haftpflicht Versicherungsnehmer Kontaktdaten
 > ask_liability_insurant_contact_details
-* set_first_name_insured_party{"first_name_insured_party":"susi"}
+* set_first_name_insured_party{"first_name_insured_party":""}
   - action_ask_liability_contact_data
   - slot{"first_name_insured_party":"susi"}
   - slot{"requested_slot":"surname_insured_party"}
   - action_ask_liability_contact_data
-* set_surname_insured_party{"surname_insured_party":"sonnenschein"}
+* set_surname_insured_party{"surname_insured_party":""}
   - slot{"surname_insured_party":"sonnenschein"}
   - slot{"requested_slot":"insurance_number"}
   - action_ask_liability_contact_data
-* set_insurance_number{"insurance_number":"1234567"}
+* set_insurance_number{"insurance_number":""}
   - slot{"insurance_number":"1234567"}
   - slot{"requested_slot":"license_plate"}
   - action_ask_kfz
@@ -109,27 +108,27 @@
 
 ## Allgemeine KFZ fragen stellen
 > ask_kfz_questions
-* set_license_plate{"license_plate":"XXXX1234"}
+* set_license_plate{"license_plate":""}
   - action_ask_kfz
   - slot{"license_plate":"XXXX1234"}
   - slot{"requested_slot":"date_of_damage"}
-* set_date_of_damage{"date_of_damage":"12.12.2012"}
+* set_date_of_damage{"date_of_damage":""}
   - action_ask_kfz
   - slot{"date_of_damage":"12.12.2012"}
   - slot{"requested_slot":"cause_of_damage"}
-* set_time_of_damage{"time_of_damage":"11:00"}
+* set_time_of_damage{"time_of_damage":""}
   - action_ask_kfz
   - slot{"date_of_damage":"12.12.2012"}
   - slot{"requested_slot":"cause_of_damage"}
-* set_cause_of_damage{"cause_of_damage":"auffahrunfall"}
+* set_cause_of_damage{"cause_of_damage":""}
   - action_ask_kfz
   - slot{"cause_of_damage":"auffahrunfall"}
   - slot{"requested_slot":"damage_location"}
-* set_damage_location{"damage_location":"autobahn"}
+* set_damage_location{"damage_location":""}
   - action_ask_kfz
   - slot{"damage_location":"autobahn"}
   - slot{"requested_slot":"description_of_accident"}
-* set_description_of_accident{"description_of_accident":"auto ist in anderes auto und peng"}
+* set_description_of_accident{"description_of_accident":""}
   - action_ask_kfz
   - slot{"description_of_accident":"auto ist in anderes auto und peng"}
   - slot{"requested_slot":"current_location_of_car"}
@@ -163,15 +162,15 @@
   - slot{"damage_from_own_car":true}
   - slot{"requested_slot":"first_name_insured_party"}
   - action_ask_kfz_other_party
-* set_first_name_other_insured_party{"first_name_insured_party":"susi"}
+* set_first_name_other_insured_party{"first_name_insured_party":""}
   - action_ask_kfz_other_party
   - slot{"first_name_insured_party":"susi"}
   - slot{"requested_slot":"surname_insured_party"}
-* set_surname_other_insured_party{"surname_insured_party":"sonnenschein"}
+* set_surname_other_insured_party{"surname_insured_party":""}
   - action_ask_kfz_other_party
   - slot{"surname_insured_party":"sonnenschein"}
   - slot{"requested_slot":"insurance_number"}
-* set_insurance_number{"insurance_number":"1234567"}
+* set_insurance_number{"insurance_number":""}
   - action_ask_insured_party_driver
   - slot{"insurance_number":"1234567"}
   - slot{"requested_slot":"insured_party_is_driver"}
@@ -193,19 +192,19 @@
   - slot{"insured_party_is_driver":false}
   - slot{"requested_slot":"form_of_address_of_driver"}
   - action_ask_insured_party_driver_informations
-* set_form_of_address_of_driver{"form_of_address_of_driver":"herr"}
+* set_form_of_address_of_driver{"form_of_address_of_driver":""}
   - action_ask_insured_party_driver_informations
   - slot{"form_of_address_of_driver":"herr"}
   - slot{"requested_slot":"first_name_of_driver"}
-* set_first_name_of_driver{"first_name_of_driver":"maxi"}
+* set_first_name_of_driver{"first_name_of_driver":""}
   - action_ask_insured_party_driver_informations
   - slot{"first_name_of_driver":"maxi"}
   - slot{"requested_slot":"surname_of_driver"}
-* set_surname_of_driver{"surname_of_driver":"mustermanni"}
+* set_surname_of_driver{"surname_of_driver":""}
   - action_ask_insured_party_driver_informations
   - slot{"surname_of_driver":"mustermanni"}
   - slot{"requested_slot":"birth_date_of_driver"}
-* set_birth_date_of_driver{"birth_date_of_driver":"01.01.1990"}
+* set_birth_date_of_driver{"birth_date_of_driver":""}
   - action_ask_insured_party_driver_informations
   - slot{"birth_date_of_driver":"01.01.1990"}
   - slot{"requested_slot":"license_plate"}
@@ -219,11 +218,11 @@
   - slot{"is_callback_wanted":true}
   - slot{"requested_slot":"callback_phone_number"}
   - action_ask_callback_information
-* set_callback_phone_number{"callback_phone_number":"2345678"}
+* set_callback_phone_number{"callback_phone_number":""}
   - action_ask_callback_information
   - slot{"callback_phone_number":"2345678"}
   - slot{"requested_slot":"reachability_date"}
-* set_date_and_time_reachability{"reachability_date":"18.09.2018 18:00"}
+* set_date_and_time_reachability{"reachability_date":""}
   - action_ask_callback_information
   - slot{"reachability_date":"18.09.2018 18:00"}
   - utter_goodbye

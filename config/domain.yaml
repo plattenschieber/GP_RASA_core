@@ -7,7 +7,7 @@ intents:
  - set_zip_code
  - set_city
  - set_phone_number
- - set_e_mail
+ - set_email
  - is_business_affair
  - branch_selected
  - is_car_damaged
@@ -52,8 +52,8 @@ actions:
  - utter_ask_street_address
  - utter_ask_address_zip_code
  - utter_ask_address_city
- - utter_ask_phone_number
- - utter_ask_e_mail
+ - utter_ask_phone-number
+ - utter_ask_email
  - utter_ask_business_affair
  - utter_ask_branch
  - utter_ask_car_is_damaged
@@ -89,7 +89,6 @@ actions:
  - utter_goodbye
  - utter_abbruch
  - action_send_email
- - action_set_callback
  - action_ask_contact_details
  - action_ask_branch
  - action_ask_car_is_damaged
@@ -104,14 +103,19 @@ actions:
  - action_ask_insured_party_driver_informations
 
 entities:
+ - phone-number
+ - email
+ - time
+ - number
+
+ - phone_number_user
+
  - form_of_address
  - first_name
  - surname
  - street_address
  - address_zip_code
  - address_city
- - phone_number
- - e_mail
  - business_affair
  - branch
  - car_is_damaged
@@ -163,6 +167,17 @@ slots:
   requested_slot:
     type: unfeaturized
 
+  phone-number:
+    type: text
+  email:
+    type: text
+  time:
+    type: text
+  phone_number_user:
+    type: text
+  number:
+    type: text
+
   form_of_address:
     type: text
   first_name:
@@ -174,10 +189,6 @@ slots:
   address_zip_code:
     type: text
   address_city:
-    type: text
-  phone_number:
-    type: text
-  e_mail:
     type: text
   business_affair:
     type: bool
@@ -301,9 +312,9 @@ templates:
    - text: "Nennen Sie mir bitte Ihre Postleitzahl."
  utter_ask_address_city:
    - text: "In welchem Ort wohnen Sie?"
- utter_ask_phone_number:
+ utter_ask_phone-number:
    - text: "Unter welcher Telefonnummer können wir Sie am besten erreichen?"
- utter_ask_e_mail:
+ utter_ask_email:
    - text: "Wie lautet Ihre E-Mail Adresse?"
  utter_ask_business_affair:
    - text: "Handelt es sich bei diesem Fall um eine gewerbliche Angelegenheit?"
