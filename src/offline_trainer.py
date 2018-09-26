@@ -24,4 +24,5 @@ def train_dialog(dialog_training_data_file, domain_file, path_to_model='./models
     agent.persist(path_to_model)
 
 
-train_dialog('./stories', './config/domain.yaml')
+def send_to_model_server():
+    pass

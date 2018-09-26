@@ -6,5 +6,6 @@ services:
     environment:
       - SOCKET_PORT=5005
       - ENDPOINTS_CONFIG_FILE=config/endpoints.local.yaml
+      - MODE=local_server
     ports:
       - "5005:5005"

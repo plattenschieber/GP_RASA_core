@@ -6,8 +6,15 @@ HTTP-Server für die API des RASA AI Chatbots.
 * *endpoints.local.yaml* Enthält die Endpoints für den lokalen Docker-Container.
 * *endpoints.prod.yaml* Enthält die Endpoints für den Production-Server.
 * *start_core.py* startet den Core Server.
-* *start-server.sh* Trainiert das Model und startet den Server mit angegebener Konfiguration.
 * *domain.yaml* Beschreibt die existierenden Intents, Entities und Sots
+
+## Environment variables
+Das Startverhalten des Servers kann mit verschiedenen environment-variablen angepasst werden:
+* *SOCKET_PORT* Setzt den Port für den Restendpoint des Webservers (Default: 5005)
+* *DIALOGUE_MODEL_DIR* Setzt den Pfad in dem sich das Modell befindet (Default: models/dialogue)
+* *ENABLE_DEBUG* Setzt das loglevel auf Debug (Default: Info)
+* *ENDPOINTS_CONFIG_FILE* Setzt den Pfad zur Konfiguration der endpoints (Default: config/endpoints.yaml)
+* *MODE* Setz den Modus in dem der Core startet, mögliche Optionen sind "local_server", "prod_server", "offline_trainer" and "online_trainer" (Default: prod_server)
 
 ## Installation
 Zur Installation empfiehlt sich den offiziellen Anweisungen zu folgen, diese sind unter [NLU Installation](http://www.rasa.com/docs/nlu/installation/) zu finden.
