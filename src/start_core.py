@@ -49,7 +49,8 @@ if __name__ == '__main__':
 
     if mode == "local_server":
         logger.info("Started offline trainer")
-        offline_trainer.train_dialog('./stories', './config/domain.yaml')
+        offline_trainer.train_dialog(dialog_training_data_file='./stories',
+                                     domain_file='./config/domain.yaml')
         logger.info("Started local server")
         web_server.start_server_local(dialogue_model_path, endpoints)
 
@@ -59,11 +60,15 @@ if __name__ == '__main__':
 
     elif mode == "offline_trainer":
         logger.info("Started offline trainer")
-        offline_trainer.train_dialog('./stories', './config/domain.yaml')
+        offline_trainer.train_dialog(dialog_training_data_file='./stories',
+                                     domain_file='./config/domain.yaml')
+        offline_trainer.send_to_model_server(path_to_model="./models/dialogue",
+                                             url="http://chatbot-model-server:8000/models/core")
 
     elif mode == "online_trainer":
         logger.info("Started offline trainer")
-        offline_trainer.train_dialog('./stories', './config/domain.yaml')
+        offline_trainer.train_dialog(dialog_training_data_file='./stories',
+                                     domain_file='./config/domain.yaml')
         logger.info("Started online trainer")
         online_trainer.start_online_training(dialogue_model_path, endpoints)
 
