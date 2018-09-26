@@ -157,6 +157,7 @@ entities:
  - name_address_if_workshop_victim
  - phone_number_if_workshop_victim
  - someone_injured
+ - entity_PER
 
 slots:
   requested_slot:
@@ -278,6 +279,10 @@ slots:
     type: text
   someone_injured:
     type: text
+  PER:
+    type: text
+  LOC:
+    type: text
 
 templates:
  utter_default:
@@ -286,7 +291,7 @@ templates:
    - text: "Hi, ich bin Zoe"
  utter_ask_form_of_address:
    - text: "Wie darf ich Sie ansprechen?"
- utter_ask_first_name:
+ utter_ask_PER:
    - text: "Wie lautet Ihr Vorname?"
  utter_ask_surname:
    - text: "Dankeschön. Wie lautet Ihr Nachname?"

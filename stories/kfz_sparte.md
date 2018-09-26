@@ -6,10 +6,9 @@
 * set_form_of_address{"form_of_address":"herr"}
   - action_ask_contact_details
   - slot{"form_of_address":"herr"}
-  - slot{"requested_slot":"first_name"}
-* set_first_name{"first_name":"max"} <!-- Regex nötig -->
+  - slot{"requested_slot":"PER"}
+* set_first_name <!-- Regex nötig -->
   - action_ask_contact_details
-  - slot{"first_name":"max"}
   - slot{"requested_slot":"surname"}
 * set_surname{"surname":"mustermann"} <!-- Regex nötig -->
   - action_ask_contact_details
