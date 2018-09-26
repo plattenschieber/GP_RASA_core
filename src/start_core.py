@@ -62,6 +62,8 @@ if __name__ == '__main__':
         offline_trainer.train_dialog('./stories', './config/domain.yaml')
 
     elif mode == "online_trainer":
+        logger.info("Started offline trainer")
+        offline_trainer.train_dialog('./stories', './config/domain.yaml')
         logger.info("Started online trainer")
         online_trainer.start_online_training(dialogue_model_path, endpoints)
 
