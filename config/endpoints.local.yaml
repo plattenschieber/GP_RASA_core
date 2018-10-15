@@ -1,9 +1,11 @@
-# Custom action endpoint for the bot
+#Endpoint to action-server
 action_endpoint:
   url: http://gpb_chatbot-action_1:5055/webhook
 
+#Endpoint to nlu-server
 nlu:
   url: http://gpb_chatbot-nlu_1:5000
 
+#Endpoint from which the model will be fetched
 model:
   url: http://gpb_chatbot-model-server_1:8000/models/core

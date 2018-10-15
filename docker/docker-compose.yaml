@@ -1,12 +1,21 @@
 version: '3'
 
+#Defines the services that will be started with this compose
 services:
+  #Starts a Container for the Rasa-Core
   chatbot-core:
     environment:
+      #Set Path to the Model
       - DIALOGUE_MODEL_DIR=models/dialogue
+      #Set Logging level (can be true or false)
       - ENABLE_DEBUG=true
     networks:
+      #Joins the Network "chatbot"
+      #and can therefore communicate with all other containers in this Network
       - chatbot
+#Defines the networks that will be used by the services
 networks:
     chatbot:
+      #define the network as external,
+      #this means it must already exist before running the compose file
       external: true

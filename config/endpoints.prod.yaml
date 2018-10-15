@@ -1,9 +1,11 @@
-# Custom action endpoint for the bot
+#Endpoint to action-server
 action_endpoint:
   url: http://chatbot-action:5055/webhook
 
+#Endpoint to nlu-server
 nlu:
   url: http://chatbot-nlu:5000
 
+#Endpoint from which the model will be fetched
 model:
   url: http://chatbot-model-server:8000/models/core

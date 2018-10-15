@@ -1,11 +1,17 @@
 version: '3'
 
+#Override file which extends the normal docker-compose
 services:
   chatbot-core:
+    #Describe the image which is the base for this container
     image: docker.nexus.gpchatbot.archi-lab.io/chatbot/core:latest
     environment:
+      #Set the port on which the server should listen
       - SOCKET_PORT=5005
+      #Set the endpoint configuration
       - ENDPOINTS_CONFIG_FILE=config/endpoints.prod.yaml
+      #Set the mode in which the server will start
       - MODE=prod_server
     ports:
+      #Open the port 5005 from container to localhost:5005 on the host machine
       - "5005:5005"
