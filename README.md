@@ -1,3 +1,13 @@
+# Preliminaries 
+This project is not maintained as of 2020. You'll find all the necessary micro services to build this project here:
+- https://github.com/plattenschieber/GP_RASA_action-server
+- https://github.com/plattenschieber/GP_RASA_core-model-server
+- https://github.com/plattenschieber/GP_RASA_nlu
+- https://github.com/plattenschieber/GP_RASA_example-chatbot
+- https://github.com/plattenschieber/GP_RASA_kfz-chatbot
+- https://github.com/plattenschieber/GP_RASA_rasa-ui
+- https://github.com/plattenschieber/GP_RASA_webchat
+
 # Rasa-Core
 Core project which represent the rasai.ai core. Can be used as base for domain specific chatbots of different purpose.
 For this the project offers a variety of start configurations.
